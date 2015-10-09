@@ -151,7 +151,7 @@ class Params {
         title = "Everybody can disarm IED with the same chances:";
         values[]={0,1}; 
         texts[]={"No","Yes"}; 
-        default = 0; 
+        default = 1; 
     };
 	class btc_p_load {
     //paramsArray[22]
