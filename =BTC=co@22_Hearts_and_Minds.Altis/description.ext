@@ -7,6 +7,8 @@ author = Giallustio;
 onLoadName = Hearts and Minds;
 onLoadMission = www.blacktemplars.altervista.org;
 
+enableDebugConsole = 1;
+
 class Header
 {
 	gameType = COOP;
