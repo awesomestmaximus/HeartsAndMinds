@@ -1,7 +1,6 @@
-private ["_pos","_start_pos","_group","_veh_type","_unit_type","_veh","_gunner","_commander","_cargo","_wp","_wp_1","_wp_2"];
-
+//MOT
+private ["_veh_type","_veh","_gunner","_commander","_cargo","_wp"];
 _pos = _this select 0;
-
 _start_pos = _pos;
 _group = createGroup btc_enemy_side;
 _group setVariable ["no_cache",true];
@@ -10,6 +9,7 @@ _veh = createVehicle [_veh_type, _start_pos, [], 0, "NONE"];
 _gunner = _veh emptyPositions "gunner";
 _commander = _veh emptyPositions "commander";
 _cargo = (_veh emptyPositions "cargo") - 1;
+if (_cargo > 4) then {_cargo = 4};
 btc_type_crewmen createUnit [_start_pos, _group, "this moveinDriver _veh;this assignAsDriver _veh;"];
 if (_gunner > 0) then {btc_type_crewmen createUnit [_start_pos, _group, "this moveinGunner _veh;this assignAsGunner _veh;"];};
 if (_commander > 0) then {btc_type_crewmen createUnit [_start_pos, _group, "this moveinCommander _veh;this assignAsCommander _veh;"];};
@@ -31,3 +31,7 @@ _wp_1 = _group addWaypoint [_pos, 60];
 _wp_1 setWaypointType "UNLOAD";
 _wp_2 = _group addWaypoint [_pos, 60];
 _wp_2 setWaypointType "SAD";
+if (btc_debug_log) then
+{
+	diag_log format ["fnc_rep_call_militia = MOT %1/%2 POS %3",_group,_veh_type,_pos];
+};
