@@ -300,7 +300,8 @@ class Mission
 					player="PLAY CDG";
 					leader=1;
 					skill=0.60000002;
-					description="Medic";
+					init="this setVariable [""interpreter"",true]";
+					description="Medic/Interpreter";
 				};
 			};
 		};
@@ -400,7 +401,8 @@ class Mission
 					player="PLAY CDG";
 					leader=1;
 					skill=0.60000002;
-					description="Medic";
+					init="this setVariable [""interpreter"",true]";
+					description="Medic/Interpreter";
 				};
 			};
 		};
