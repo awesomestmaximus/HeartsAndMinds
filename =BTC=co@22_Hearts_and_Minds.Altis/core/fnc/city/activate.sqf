@@ -80,7 +80,7 @@ if (_city getVariable ["spawn_more",false]) then {
 		case "STRING":{_pos = getMarkerPos _city;};
 		case "OBJECT":{_pos = position _city;};
 	};
-	for "_i" from 1 to (4) do {	[[(_pos select 0) + (random _radius - _radius),(_pos select 1) + (random _radius - _radius) ,0]] call btc_fnc_mil_create_motorized;};
+	for "_i" from 1 to (4) do {	[[(_pos select 0) + (random _radius*2 - _radius),(_pos select 1) + (random _radius*2 - _radius) ,0]] call btc_fnc_mil_create_motorized;};
 	for "_i" from 1 to (2 + round random 3) do {[_city,_radius,(4 + random 3),(random 1)] call btc_fnc_mil_create_group;};
 };
 
