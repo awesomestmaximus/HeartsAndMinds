@@ -9,7 +9,7 @@ _veh = createVehicle [_veh_type, _start_pos, [], 0, "NONE"];
 _gunner = _veh emptyPositions "gunner";
 _commander = _veh emptyPositions "commander";
 _cargo = (_veh emptyPositions "cargo") - 1;
-if (_cargo > 4) then {_cargo = 4};
+
 btc_type_crewmen createUnit [_start_pos, _group, "this moveinDriver _veh;this assignAsDriver _veh;"];
 if (_gunner > 0) then {btc_type_crewmen createUnit [_start_pos, _group, "this moveinGunner _veh;this assignAsGunner _veh;"];};
 if (_commander > 0) then {btc_type_crewmen createUnit [_start_pos, _group, "this moveinCommander _veh;this assignAsCommander _veh;"];};
