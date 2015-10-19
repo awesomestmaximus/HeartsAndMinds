@@ -87,7 +87,7 @@ if (_has_ho && {!(_city getVariable ["ho_units_spawned",false])}) then {
 	private ["_pos","_random"];
 	_city setVariable ["ho_units_spawned",true];
 	//_pos = _city getVariable ["ho_pos",getPos _city];ho
-	_pos = _city getVariable ["ho",_city];
+	_pos = _city getVariable ["ho_pos", getpos _city];
 	[_pos,20,(10 + random 6),0.8] call btc_fnc_mil_create_group;
 	[_pos,120,(1 + random 2),0.5] call btc_fnc_mil_create_group;
 	[_pos,120,(1 + random 2),0.5] call btc_fnc_mil_create_group;
@@ -129,10 +129,7 @@ if (btc_patrol_active < btc_patrol_max) then {
 	{
 		[(1 + round random 1),_city,((_radius_x+_radius_y) + btc_patrol_area)] call btc_fnc_mil_patrol_create;
 	};
-	if (btc_debug_log) then
-	{
-		diag_log format ["btc_fnc_city_activate: (patrol) _n = %1 _av %2 _d %3 _r %4",_n,_av,_d,_r];
-	};
+	if (btc_debug_log) then	{diag_log format ["btc_fnc_city_activate: (patrol) _n = %1 _av %2 _d %3 _r %4",_n,_av,_d,_r];};
 };
 
 //Traffic
@@ -146,9 +143,7 @@ if (btc_civ_veh_active < btc_civ_max_veh) then {
 	for "_i" from 1 to _r do {
 		[_city,((_radius_x+_radius_y) + btc_patrol_area)] call btc_fnc_civ_traffic_create;
 	};
-	if (btc_debug_log) then	{
-		diag_log format ["btc_fnc_city_activate: (traffic) _n = %1 _av %2 _d %3 _r %4",_n,_av,_d,_r];
-	};
+	if (btc_debug_log) then	{diag_log format ["btc_fnc_city_activate: (traffic) _n = %1 _av %2 _d %3 _r %4",_n,_av,_d,_r];};
 };
 
 //Suicider 
