@@ -4,7 +4,7 @@ _start_pos = _this select 0;
 if (count (_start_pos nearRoads 100) > 0) then {_pos = getPos ((_start_pos nearRoads 100) select 0)} else {_pos = [_start_pos, 10, 100, 13, 0, 60 * (pi / 180), 0] call BIS_fnc_findSafePos;};
 _group = createGroup btc_enemy_side;
 _group setVariable ["no_cache",true];
-_veh_type = btc_type_motorized select (floor random count btc_type_motorized);
+_veh_type = btc_type_motorized_armed select (floor random count btc_type_motorized);
 _veh = createVehicle [_veh_type, _start_pos, [], 0, "NONE"];
 _gunner = _veh emptyPositions "gunner";
 _commander = _veh emptyPositions "commander";
