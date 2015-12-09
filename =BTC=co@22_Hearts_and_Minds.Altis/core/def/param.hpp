@@ -9,8 +9,8 @@ class Params {
 	class btc_p_en {
 	//paramsArray[1]
         title = "Enemy type:";
-		values[]={0,1}; 
-		texts[]={"Guerrilla (A3)","CAF"}; 
+		values[]={0,1,2,3}; 
+		texts[]={"Guerrilla (A3)","CAF","AAF (A3)","RHS Insurgents"}; 
 		default = 0; 
 	};
 	class btc_p_ied {
@@ -160,8 +160,22 @@ class Params {
         texts[]={"No","Yes"}; 
         default = 1; 
     };
+	class btc_p_med_level {
+		//paramsArray[23]
+	   title = "Medical Level";
+	   values[] = {1,2};
+	   texts[] = {"Basic","Advanced"};
+	   default = 1;
+	};
+	class btc_p_adv_wounds {
+		//paramsArray[24]
+	   title = "Advanced Wounds";
+	   values[] = {0,1};
+	   texts[] = {"Off","On"};
+	   default = 1;
+	};
 	class btc_p_rev {
-    //paramsArray[23]
+    //paramsArray[25]
         title = "Revive time:";
         values[]={0,60,120,180,240,300,600,900,1200,999999}; 
         texts[]={"0","60","120","180","240","300","600","900","1200","999999"}; 

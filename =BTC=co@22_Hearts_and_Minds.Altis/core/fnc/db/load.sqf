@@ -10,14 +10,14 @@ _cities_status = profileNamespace getVariable ["btc_hm_cities",[]];
 {
 /*
 	_city_status pushBack (_x getVariable "id");
-		
+
 	_city_status pushBack (_x getVariable "initialized");
 
 	_city_status pushBack (_x getVariable "spawn_more");
 	_city_status pushBack (_x getVariable "occupied");
-	
+
 	_city_status pushBack (_x getVariable "data_units");
-	
+
 	_city_status pushBack (_x getVariable ["has_ho",false]);
 	_city_status pushBack (_x getVariable ["ho_units_spawned",false]);
 	_city_status pushBack (_x getVariable ["ieds",[]]);
@@ -35,12 +35,12 @@ _cities_status = profileNamespace getVariable ["btc_hm_cities",[]];
 	_city setVariable ["has_ho",(_x select 5)];
 	_city setVariable ["ho_units_spawned",(_x select 6)];
 	_city setVariable ["ieds",(_x select 7)];
-	
+
 	if (btc_debug) then	{//_debug
 
 		if (_city getVariable ["occupied",false]) then {(_city getVariable ["marker",""]) setmarkercolor "colorRed";} else {(_city getVariable ["marker",""]) setmarkercolor "colorGreen";};
 		(_city getVariable ["marker",""]) setmarkertext format ["loc_%3 %1 %2 - [%4]",(_city getVariable "name"),_city getVariable "type",_id,(_x select 3)];
-		
+
 		diag_log format ["ID: %1",_id];
 		diag_log format ["data_city: %1",_x];
 		diag_log format ["LOAD: %1 - %2",_id,(_x select 3)];
@@ -54,12 +54,12 @@ _cities_status = profileNamespace getVariable ["btc_hm_cities",[]];
 	_data pushBack (_x getVariable ["rinf_time",0]);
 	_data pushBack (_x getVariable ["cap_time",0]);
 	_data pushBack (_x getVariable ["assigned_to",objNull]);
-	
+
 	_cache_markers = [];
 	{
 		_data = [];
 		_data pushback (getMarkerPos _x);
-		_data pushback (markerText _x);	
+		_data pushback (markerText _x);
 	} foreach (_x getVariable ["markers",[]]);
 	_data pushback (_cache_markers);
 */
@@ -67,8 +67,8 @@ _array_ho = profileNamespace getVariable ["btc_hm_ho",[]];
 
 {
 	_pos = (_x select 0);
-	
-	[_pos,btc_composition_hideout] call btc_fnc_create_composition;
+
+	[_pos,(random 360),btc_composition_hideout] call btc_fnc_create_composition;
 
 	_hideout = nearestObject [_pos, "C_supplyCrate_F"];
 	clearWeaponCargoGlobal _hideout;clearItemCargoGlobal _hideout;clearMagazineCargoGlobal _hideout;
@@ -88,15 +88,15 @@ _array_ho = profileNamespace getVariable ["btc_hm_ho",[]];
 		_marker setMarkerColor "ColorRed";
 		_markers pushBack _marker;
 	} foreach (_x select 5);
-	
+
 	_hideout setVariable ["markers",_markers];
-	
+
 	if (btc_debug) then {
 		//Marker
 		createmarker [format ["btc_hideout_%1", _pos], _pos];
-		format ["btc_hideout_%1", _pos] setmarkertypelocal "mil_unknown";
-		format ["btc_hideout_%1", _pos] setMarkerTextLocal format ["Hideout %1", btc_hideouts_id];
-		format ["btc_hideout_%1", _pos] setMarkerSizeLocal [0.8, 0.8];
+		format ["btc_hideout_%1", _pos] setmarkertype "mil_unknown";
+		format ["btc_hideout_%1", _pos] setMarkerText format ["Hideout %1", btc_hideouts_id];
+		format ["btc_hideout_%1", _pos] setMarkerSize [0.8, 0.8];
 	};
 
 	if (btc_debug_log) then {diag_log format ["btc_fnc_mil_create_hideout: _this = %1 ; POS %2 ID %3",_x,_pos,btc_hideouts_id];};
@@ -106,7 +106,10 @@ _array_ho = profileNamespace getVariable ["btc_hm_ho",[]];
 } foreach _array_ho;
 
 _ho = profileNamespace getVariable ["btc_hm_ho_sel",objNull];
-btc_hq getVariable ["info_hideout",_ho];
+btc_hq setVariable ["info_hideout",_ho];
+
+if (count btc_hideouts == 0) then {[] execVM "core\fnc\common\final_phase.sqf";};
+
 //CACHE
 
 btc_cache_cities = + btc_city_all;
@@ -190,7 +193,7 @@ diag_log format ["5: %1",(_x select 5)];
 {
 	private "_veh";
 	_veh = (_x select 0) createVehicle (_x select 1);
-	btc_vehicles = btc_vehicles + [_veh];
+	btc_vehicles pushBack _veh;
 	_veh addEventHandler ["Killed", {_this call btc_fnc_eh_veh_killed}];
 	_veh setVariable ["btc_dont_delete",true];
 	_veh setDir (_x select 2);
