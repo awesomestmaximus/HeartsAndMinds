@@ -30,6 +30,7 @@ _p_db = if ((paramsArray select 22) isEqualTo 0) then {false} else {true};
 ace_medical_level = paramsArray select 23;
 ace_medical_enableAdvancedWounds = paramsArray select 24;
 ace_medical_maxReviveTime = paramsArray select 25;
+ace_medical_enableFor = 1;
 //btc_acre_mod = isClass(configFile >> "cfgPatches" >> "acre_main");
 //btc_tfr_mod = isClass(configFile >> "cfgPatches" >> "task_force_radio");
 
@@ -140,7 +141,7 @@ btc_w_civs = ["V_Rangemaster_belt","arifle_Mk20_F","30Rnd_556x45_Stanag","hgun_A
 btc_cache_type = "Box_East_Ammo_F";
 
 //FOB
-btc_fob_mat = "Land_Cargo20_blue_F";
+btc_fob_mat = "Land_Cargo10_blue_F";
 btc_fob_structure = "Land_Cargo_HQ_V1_F";
 btc_fob_flag = "Flag_NATO_F";
 btc_fob_id = 0;
@@ -162,7 +163,7 @@ btc_info_cache_ratio = _cache_info_ratio;
 btc_info_hideout_radius = 4000;
 
 //Supplies
-btc_supplies_mat ="Land_Cargo20_red_F";
+btc_supplies_mat ="B_Slingload_01_Ammo_F";
 
 //Log
 btc_construction_array =
@@ -387,7 +388,7 @@ switch (true) do {
 		btc_type_units            = ["I_Soldier_F","I_Soldier_TL_F","I_Soldier_AR_F","I_engineer_F","I_Soldier_exp_F","I_Soldier_GL_F","I_Soldier_LAT_F","I_Soldier_AT_F","I_Soldier_AA_F","I_Spotter_F","I_Sniper_F"];
 		btc_type_crewmen          = "I_Soldier_F";
 		btc_type_vehicles         = ["I_G_Offroad_01_F","I_G_Offroad_01_armed_F","I_MRAP_03_F","I_MRAP_03_hmg_F","I_MRAP_03_gmg_F"];
-		btc_type_motorized        = ["I_G_Offroad_01_F","I_G_Offroad_01_armed_F","I_Truck_02_transport_F","I_G_Offroad_01_armed_F","I_Truck_02_covered_F","I_MRAP_03_F","I_MRAP_03_hmg_F","I_MRAP_03_gmg_F","I_Heli_light_03_F","I_APC_tracked_03_cannon_F"];
+		btc_type_motorized        = ["I_G_Offroad_01_F","I_G_Offroad_01_armed_F","I_Truck_02_transport_F","I_G_Offroad_01_armed_F","I_Truck_02_covered_F","I_MRAP_03_F","I_MRAP_03_hmg_F","I_MRAP_03_gmg_F","I_Heli_light_03_F","I_APC_tracked_03_cannon_F","I_APC_Wheeled_03_cannon_F"];
 		btc_type_mg = ["I_HMG_01_F","I_HMG_01_high_F"];
 		btc_type_gl = ["I_GMG_01_F","I_GMG_01_high_F"];
 	};
