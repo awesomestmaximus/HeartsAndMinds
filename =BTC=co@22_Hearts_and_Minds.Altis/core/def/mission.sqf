@@ -123,7 +123,6 @@ if (isServer) then {
 	btc_type_pallet = ["Land_Pallets_stack_F","Land_Pallets_F","Land_Pallet_F"];
 	btc_type_box = ["Box_East_Wps_F","Box_East_WpsSpecial_F","Box_East_Ammo_F"];
 
-
 	//Vehs
 	btc_vehicles = [btc_veh_1,btc_veh_2,btc_veh_3,btc_veh_4,btc_veh_5,btc_veh_6,btc_veh_7,btc_veh_8,btc_veh_9,btc_veh_10,btc_veh_11,btc_veh_12,btc_veh_13,btc_veh_14];
 };
@@ -214,7 +213,6 @@ btc_construction_array =
 		],
 		[
 			//"Ammobox"
-			"rhsusf_mags_crate",
 			"Box_NATO_Ammo_F",
 			"Box_NATO_Support_F",
 			"ACE_medicalSupplyCrate_advanced",
