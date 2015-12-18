@@ -21,7 +21,14 @@ _radius = (_radius_x+_radius_y)/2;
 
 if (!_is_init) then {
 	private ["_ratio_ied","_ratio"];
-	_ratio = (switch _type do {case "Hill" : {random 1};case "NameLocal" : {random 2.5};case "NameVillage" : {random 3.5};case "NameCity" : {random 5};case "NameCityCapital" : {random 6};});
+	_ratio = (switch _type do {
+		case "Hill" : {random 1};
+		case "NameLocal" : {random 2.5};
+		case "NameVillage" : {random 3.5};
+		case "NameCity" : {random 5};
+		case "NameCityCapital" : {random 6};
+		case "NameMarine" : {0};
+		});
 	_ratio_ied = _ratio;
 	if (_has_en) then {_ratio_ied = _ratio_ied * 1.5;} else {_ratio_ied = _ratio_ied * 0.75;};
 	if (_has_ho) then {_ratio_ied = _ratio_ied * 2;};
@@ -43,7 +50,15 @@ if (count _data_units > 0) then {
 } else {
 	private ["_ratio"];
 	//spawn bad guys "NameVillage","NameCity","NameCityCapital","NameLocal"
-	_ratio = (switch _type do {case "Hill" : {0.6};case "NameLocal" : {0.75};case "NameVillage" : {1};case "NameCity" : {2};case "NameCityCapital" : {4}; default {0.1};});
+	_ratio = (switch _type do {
+		case "Hill" : {0.6};
+		case "NameLocal" : {0.75};
+		case "NameVillage" : {1};
+		case "NameCity" : {2};
+		case "NameCityCapital" : {4};
+		case "NameMarine" : {0.6};
+		default {0.1};
+		});
 	if (_has_en) then
 	{
 		private ["_groups","_n","_trigger"];
@@ -66,7 +81,13 @@ if (count _data_units > 0) then {
 	//spawn civilians
 	if (_type != "Hill") then {
 		private ["_factor","_n"];
-		_factor = (switch _type do {case "NameLocal" : {0.5};case "NameVillage" : {1.5};case "NameCity" : {3};case "NameCityCapital" : {6}; default {1};});
+		_factor = (switch _type do {
+			case "NameLocal" : {0.5};
+			case "NameVillage" : {1.5};
+			case "NameCity" : {3};
+			case "NameCityCapital" : {6};
+			default {1};
+			});
 		_n = 3 * _factor;
 		[_city,(_radius/3),_n] call btc_fnc_civ_populate;
 	};
