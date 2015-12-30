@@ -181,4 +181,11 @@ class Params {
         texts[]={"0","60","120","180","240","300","600","900","1200","999999"};
         default = 600;
     };
+    class btc_p_sea {
+    //paramsArray[26]
+		title = "Extend battlefield to sea:";
+		values[] = {0,1};
+		texts[] = {"Off","On"};
+		default = 1;
+    };
 };
