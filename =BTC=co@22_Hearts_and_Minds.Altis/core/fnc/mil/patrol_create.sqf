@@ -1,5 +1,5 @@
 
-private ["_random","_city","_area","_cities","_useful","_pos","_group","_pos_iswater","_crewmen","_unit_type","_needdiver"];
+private ["_random","_city","_area","_cities","_useful","_usefuls","_pos","_group","_pos_iswater","_crewmen","_unit_type","_needdiver"];
 
 _random = _this select 0;//0 random, 1 inf, 2 moto, 3 heli
 _city = _this select 1;
@@ -23,8 +23,8 @@ if (_random isEqualTo 0) then {
 };
 _cities = [];
 {if (_x distance _city < _area) then {_cities pushBack _x;};} foreach btc_city_all;
-_useful = [];
-{if (!(_x getVariable ["active",false]) && _x getVariable ["occupied",false]) then {_useful pushBack (getPos _x);};} foreach _cities;
+_usefuls = [];
+{if (!(_x getVariable ["active",false]) && _x getVariable ["occupied",false]) then {_usefuls pushBack _x;};} foreach _cities;
 
 /*
 if (count _useful == 0) then {
@@ -36,9 +36,14 @@ if (count _useful == 0) then {
 };
 */
 
-if (_useful isEqualTo []) exitWith {true};
+if (_usefuls isEqualTo []) exitWith {true};
 
-_pos = _useful select (floor random count _useful);
+_useful = _usefuls select (floor random count _usefuls);
+if (_useful getVariable ["hasbeach",false]) then {
+	_pos = [getPos _useful,((_useful getVariable ["RadiusX",0]) + (_useful getVariable ["RadiusY",0])), btc_p_sea] call btc_fnc_randomize_pos;
+} else {
+	_pos = getPos _useful;
+};
 
 _group = createGroup btc_enemy_side;
 _group setVariable ["city",_city];
@@ -77,7 +82,7 @@ switch (true) do {
 			_veh_type = btc_type_motorized select (floor (random (count btc_type_motorized)));
 		};
 
-		_needdiver = (_veh_type isEqualTo "I_SDV_01_F" || _veh_type isEqualTo "O_SDV_01_F" || _veh_type isEqualTo "B_SDV_01_F");
+		_needdiver = getText(configfile >> "CfgVehicles" >> _veh_type >> "simulation") isEqualTo "submarinex";
 		if (_needdiver) then {_crewmen = btc_type_divers select 0} else {_crewmen = btc_type_crewmen};
 		_veh = createVehicle [_veh_type, _newZone, [], 0, "NONE"];
 		[_veh,_group,false,"",_crewmen] call BIS_fnc_spawnCrew;
