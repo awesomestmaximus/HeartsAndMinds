@@ -37,7 +37,8 @@ class Mission
 		"A3_Soft_F_Gamma_Offroad",
 		"a3_soft_f_offroad_01",
 		"A3_Armor_F_AMV",
-		"A3_Soft_F_Bootcamp_Offroad_01"
+		"A3_Soft_F_Bootcamp_Offroad_01",
+		"3DEN"
 	};
 	addOnsAuto[]=
 	{
@@ -45,6 +46,7 @@ class Mission
 		"a3_characters_f",
 		"A3_Characters_F_OPFOR",
 		"ace_cargo",
+		"3DEN",
 		"a3_modules_f_curator_curator",
 		"ace_respawn",
 		"ace_captives",
@@ -129,7 +131,7 @@ class Mission
 				items=1;
 				class Item0
 				{
-					position[]={8320.2334,75.940002,10044.377};
+					position[]={8136.9263,74.530151,9947.4609};
 					azimut=180;
 					id=1;
 					side="EAST";
@@ -757,7 +759,7 @@ class Mission
 				items=1;
 				class Item0
 				{
-					position[]={8321.8301,75.940002,10044.296};
+					position[]={8138.5229,74.51683,9947.3799};
 					azimut=180;
 					id=28;
 					side="WEST";
@@ -777,7 +779,7 @@ class Mission
 				items=1;
 				class Item0
 				{
-					position[]={8323.3779,75.940002,10044.296};
+					position[]={8140.0708,74.496201,9947.3799};
 					azimut=180;
 					id=29;
 					side="GUER";
