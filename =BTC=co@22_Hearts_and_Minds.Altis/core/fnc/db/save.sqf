@@ -8,7 +8,6 @@ hint "saving...";
 [[8],"btc_fnc_show_hint"] spawn BIS_fnc_MP;
 
 btc_db_is_saving = true;
-_name = worldName;
 
 ["write", ["mission_Param", "date", date]] call OO_fnc_inidbi;
 
