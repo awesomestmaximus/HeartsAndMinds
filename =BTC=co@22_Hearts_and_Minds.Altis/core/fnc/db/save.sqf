@@ -1,9 +1,5 @@
-/*
-profileNamespace setVariable ["var_kills",10000];
-saveProfileNamespace;
-_playerKills = profileNamespace getVariable "var_kills";*/
 
-call btc_fnc_db_delete;
+"delete" call OO_fnc_inidbi;
 
 private ["_cities_status","_fobs"];
 
@@ -13,7 +9,7 @@ hint "saving...";
 btc_db_is_saving = true;
 _name = worldName;
 
-profileNamespace setVariable [format ["btc_hm_%1_date",_name],date];
+["write", ["mission_Param", "date", date]] call OO_fnc_inidbi;
 
 for "_i" from 0 to (count btc_city_all - 1) do {
 	private "_s";
@@ -44,7 +40,7 @@ _cities_status = [];
 	_cities_status pushBack _city_status;
 	//diag_log format ["SAVE: %1 - %2",(_x getVariable "id"),(_x getVariable "occupied")];
 } foreach btc_city_all;
-profileNamespace setVariable [format ["btc_hm_%1_cities",_name],_cities_status];
+["write", ["environement", "cities", _cities_status]] call OO_fnc_inidbi;
 
 //HIDEOUT
 _array_ho = [];
@@ -67,9 +63,9 @@ _array_ho = [];
 	diag_log format ["HO %1 DATA %2",_x,_data];
 	_array_ho pushBack _data;
 } foreach btc_hideouts;
-profileNamespace setVariable [format ["btc_hm_%1_ho",_name],_array_ho];
+["write", ["environement", "ho", _array_ho]] call OO_fnc_inidbi;
 
-profileNamespace setVariable [format ["btc_hm_%1_ho_sel",_name],(btc_hq getVariable ["info_hideout",objNull])];
+["write", ["environement", "ho_sel", (btc_hq getVariable ["info_hideout",objNull])]] call OO_fnc_inidbi;
 
 //CACHE
 _array_cache = [];
@@ -84,10 +80,11 @@ _cache_markers = [];
 	_cache_markers pushBack _data;
 } foreach btc_cache_markers;
 _array_cache pushback (_cache_markers);
-profileNamespace setVariable [format ["btc_hm_%1_cache",_name],_array_cache];
+["write", ["environement", "cache", _array_cache]] call OO_fnc_inidbi;
 
 //rep status
-profileNamespace setVariable [format ["btc_hm_%1_rep",_name],btc_global_reputation];
+["write", ["environement", "rep", btc_global_reputation]] call OO_fnc_inidbi;
+
 //FOBS
 _fobs = [];
 {
@@ -95,7 +92,7 @@ _fobs = [];
 	_pos = getMarkerPos _x;
 	_fobs pushBack [_x,_pos];
 } foreach btc_fobs;
-profileNamespace setVariable [format ["btc_hm_%1_fobs",_name],_fobs];
+["write", ["base", "fobs", _fobs]] call OO_fnc_inidbi;
 
 //Vehicles status
 _array_veh = [];
@@ -112,7 +109,7 @@ _array_veh = [];
 	_array_veh pushBack _data;
 	//diag_log format ["VEH %1 DATA %2",_x,_data];
 } foreach btc_vehicles;
-profileNamespace setVariable [format ["btc_hm_%1_vehs",_name],_array_veh];
+["write", ["base", "vehs", _array_veh]] call OO_fnc_inidbi;
 
 //Objects status
 _array_obj = [];
@@ -127,11 +124,9 @@ _array_obj = [];
 	_data pushBack _cargo;
 	_array_obj pushBack _data;
 } foreach btc_log_obj_created;
-profileNamespace setVariable [format ["btc_hm_%1_objs",_name],_array_obj];
+["write", ["base", "objs", _array_obj]] call OO_fnc_inidbi;
 
 //
-profileNamespace setVariable [format ["btc_hm_%1_db",_name],true];
-saveProfileNamespace;
 hint "saving...3";
 [[9],"btc_fnc_show_hint"] spawn BIS_fnc_MP;
 

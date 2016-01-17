@@ -41,6 +41,7 @@ if (isServer) then {
 	btc_fnc_data_spawn_group = compile preprocessFile "core\fnc\data\spawn_group.sqf";
 
 	//DB
+	OO_fnc_inidbi = compile {["new", format ["btc_hm_%1_date",worldName]] call OO_INIDBI};
 	btc_fnc_db_save = compile preprocessFile "core\fnc\db\save.sqf";
 	btc_fnc_db_delete = compile preprocessFile "core\fnc\db\delete.sqf";
 
