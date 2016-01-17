@@ -1,13 +1,11 @@
 
 private ["_cities_status","_fobs","_name","_city_status","_array_ho","_data","_ho_markers","_array_cache","_c
-","_fobs","_array_veh","_cargo","_array_obj","_marker"];
+","_fobs","_array_veh","_cargo","_array_obj","_marker","_ho"];
 
-_name = worldName;
-
-setDate (profileNamespace getVariable [format ["btc_hm_%1_date",_name],date]);
+setDate (["read", ["mission_Param", "date", date]] call OO_fnc_inidbi);
 
 //CITIES
-_cities_status = profileNamespace getVariable [format ["btc_hm_%1_cities",_name],[]];
+_cities_status = ["read", ["environement", "cities", [] ]] call OO_fnc_inidbi;
 //diag_log format ["_cities_status: %1",_cities_status];
 
 {
@@ -66,7 +64,7 @@ _cities_status = profileNamespace getVariable [format ["btc_hm_%1_cities",_name]
 	} foreach (_x getVariable ["markers",[]]);
 	_data pushback (_cache_markers);
 */
-_array_ho = profileNamespace getVariable [format ["btc_hm_%1_ho",_name],[]];
+_array_ho = ["read", ["environement", "ho", [] ]] call OO_fnc_inidbi;
 
 {
 	_pos = (_x select 0);
@@ -105,10 +103,10 @@ _array_ho = profileNamespace getVariable [format ["btc_hm_%1_ho",_name],[]];
 	if (btc_debug_log) then {diag_log format ["btc_fnc_mil_create_hideout: _this = %1 ; POS %2 ID %3",_x,_pos,btc_hideouts_id];};
 
 	btc_hideouts_id = btc_hideouts_id + 1;
-	btc_hideouts = btc_hideouts + [_hideout];
+	btc_hideouts pushBack _hideout;
 } foreach _array_ho;
 
-_ho = profileNamespace getVariable [format ["btc_hm_%1_ho_sel",_name],objNull];
+_ho = ["read", ["environement", "ho_sel", objNull]] call OO_fnc_inidbi;
 btc_hq setVariable ["info_hideout",_ho];
 
 if (count btc_hideouts == 0) then {[] execVM "core\fnc\common\final_phase.sqf";};
@@ -118,7 +116,7 @@ if (count btc_hideouts == 0) then {[] execVM "core\fnc\common\final_phase.sqf";}
 btc_cache_cities = + btc_city_all;
 btc_cache_markers = [];
 
-_array_cache = profileNamespace getVariable [format ["btc_hm_%1_cache",_name],[]];
+_array_cache = ["read", ["environement", "cache", [] ]] call OO_fnc_inidbi;
 
 btc_cache_pos = _array_cache select 0;
 btc_cache_n = _array_cache select 1;
@@ -135,7 +133,7 @@ btc_cache_obj addEventHandler ["HandleDamage", btc_fnc_cache_hd_cache];
 	_marker setMarkerText (_x select 1);
 	_marker setMarkerSize [0.5, 0.5];
 	_marker setMarkerColor "ColorRed";
-	btc_cache_markers = btc_cache_markers + [_marker];
+	btc_cache_markers pushBack _marker;
 } foreach (_array_cache select 3);
 
 if (btc_debug_log) then {diag_log format ["CACHE SPAWNED: ID %1 POS %2",btc_cache_n,btc_cache_pos];};
@@ -150,10 +148,10 @@ if (btc_debug) then {
 };
 
 //REP
-btc_global_reputation = profileNamespace getVariable [format ["btc_hm_%1_rep",_name],0];
+btc_global_reputation = ["read", ["environement", "rep", 0 ]] call OO_fnc_inidbi;
 
 //FOB
-_fobs = profileNamespace getVariable [format ["btc_hm_%1_fobs",_name],[]];
+_fobs = ["read", ["environement", "fobs", [] ]] call OO_fnc_inidbi;
 _fobs_loaded = [];
 
 {
@@ -183,7 +181,7 @@ btc_fobs = _fobs_loaded;
 {deleteVehicle _x} foreach btc_vehicles;
 btc_vehicles = [];
 
-_vehs = profileNamespace getVariable [format ["btc_hm_%1_vehs",_name],[]];
+_vehs = ["read", ["base", "vehs", [] ]] call OO_fnc_inidbi;
 /*
 {diag_log format ["0: %1",(_x select 0)];
 diag_log format ["1: %1",(_x select 1)];
@@ -205,7 +203,7 @@ diag_log format ["5: %1",(_x select 5)];
 	{
 		private "_obj";
 		_obj = _x createVehicle [0,0,0];
-		btc_log_obj_created = btc_log_obj_created + [_obj];
+		btc_log_obj_created pushBack _obj;
 		[_obj,_veh] call btc_fnc_log_server_load;
 	} foreach (_x select 5);
 } foreach _vehs;
@@ -224,17 +222,17 @@ diag_log format ["5: %1",(_x select 5)];
 	_array_obj pushBack _data;
 */
 //btc_log_obj_created = [];
-_objs = profileNamespace getVariable [format ["btc_hm_%1_objs",_name],[]];
+_objs = ["read", ["base", "objs", [] ]] call OO_fnc_inidbi;
 {
 	private "_obj";
 	_obj = (_x select 0) createVehicle (_x select 1);
-	btc_log_obj_created = btc_log_obj_created + [_obj];
+	btc_log_obj_created pushBack _obj;
 	_obj setDir (_x select 2);
 	_obj setPosASL (_x select 1);
 	{
 		private "_l";
 		_l = _x createVehicle [0,0,0];
-		btc_log_obj_created = btc_log_obj_created + [_l];
+		btc_log_obj_created pushBack _l;
 		[_l,_obj] call btc_fnc_log_server_load;
 	} foreach (_x select 3);
 } foreach _objs;
