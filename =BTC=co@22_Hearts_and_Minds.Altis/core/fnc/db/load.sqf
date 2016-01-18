@@ -78,7 +78,7 @@ _array_ho = ["read", ["environement", "ho", [] ]] call OO_fnc_inidbi;
 	_hideout setVariable ["cap_time",(_x select 3)];
 	_city = btc_city_all select 0;
 	_city_pos = _pos distance (getpos _city);
-	{if ((_pos distance (getpos _x)) < _city_pos) then {_city = _x; _city_pos = getpos _city;}} forEach btc_city_all;
+	{if ((_pos distance (getpos _x)) < _city_pos) then {_city = _x; _city_pos = _pos distance (getpos _city);}} forEach btc_city_all;
 	_hideout setVariable ["assigned_to", _city];
 
 	_hideout addEventHandler ["HandleDamage", btc_fnc_mil_hd_hideout];
