@@ -76,7 +76,10 @@ _array_ho = ["read", ["environement", "ho", [] ]] call OO_fnc_inidbi;
 	_hideout setVariable ["id",(_x select 1)];
 	_hideout setVariable ["rinf_time",(_x select 2)];
 	_hideout setVariable ["cap_time",(_x select 3)];
-	_hideout setVariable ["assigned_to",(_x select 4)];
+	_city = btc_city_all select 0;
+	_city_pos = _pos distance (getpos _city);
+	{if ((_pos distance (getpos _x)) < _city_pos) then {_city = _x; _city_pos = getpos _city;}} forEach btc_city_all;
+	_hideout setVariable ["assigned_to", _city];
 
 	_hideout addEventHandler ["HandleDamage", btc_fnc_mil_hd_hideout];
 
@@ -88,7 +91,7 @@ _array_ho = ["read", ["environement", "ho", [] ]] call OO_fnc_inidbi;
 		_marker setMarkerSize [0.5, 0.5];
 		_marker setMarkerColor "ColorRed";
 		_markers pushBack _marker;
-	} foreach (_x select 5);
+	} foreach (_x select 4);
 
 	_hideout setVariable ["markers",_markers];
 
@@ -106,7 +109,9 @@ _array_ho = ["read", ["environement", "ho", [] ]] call OO_fnc_inidbi;
 	btc_hideouts pushBack _hideout;
 } foreach _array_ho;
 
-_ho = ["read", ["environement", "ho_sel", objNull]] call OO_fnc_inidbi;
+_ho = btc_hideouts select 0;
+_id_inidbi = ["read", ["environement", "ho_sel", 0]] call OO_fnc_inidbi;
+{if ((_x getVariable ["id",0]) == _id_inidbi) exitWith {_ho = _x}} forEach btc_hideouts;
 btc_hq setVariable ["info_hideout",_ho];
 
 if (count btc_hideouts == 0) then {[] execVM "core\fnc\common\final_phase.sqf";};

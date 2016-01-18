@@ -50,7 +50,6 @@ _array_ho = [];
 	_data pushBack (_x getVariable ["id",0]);
 	_data pushBack (_x getVariable ["rinf_time",0]);
 	_data pushBack (_x getVariable ["cap_time",0]);
-	_data pushBack (_x getVariable ["assigned_to",objNull]);
 
 	_ho_markers = [];
 	{
@@ -65,7 +64,7 @@ _array_ho = [];
 } foreach btc_hideouts;
 ["write", ["environement", "ho", _array_ho]] call OO_fnc_inidbi;
 
-["write", ["environement", "ho_sel", (btc_hq getVariable ["info_hideout",objNull])]] call OO_fnc_inidbi;
+["write", ["environement", "ho_sel", (btc_hq getVariable ["info_hideout",objNull]) getVariable ["id",0] ]] call OO_fnc_inidbi;
 
 //CACHE
 _array_cache = [];
