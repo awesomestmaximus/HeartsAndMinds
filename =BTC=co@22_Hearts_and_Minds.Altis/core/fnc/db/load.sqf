@@ -1,6 +1,5 @@
 
-private ["_cities_status","_fobs","_name","_city_status","_array_ho","_data","_ho_markers","_array_cache","_c
-","_fobs","_array_veh","_cargo","_array_obj","_marker","_ho"];
+private ["_cities_status","_fobs","_name","_city_status","_array_ho","_data","_ho_markers","_array_cache","_fobs","_array_veh","_cargo","_array_obj","_marker","_ho","_data_units"];
 
 setDate (["read", ["mission_Param", "date", date]] call OO_fnc_inidbi);
 
@@ -32,7 +31,15 @@ _cities_status = ["read", ["environement", "cities", [] ]] call OO_fnc_inidbi;
 	_city setVariable ["initialized",(_x select 1)];
 	_city setVariable ["spawn_more",(_x select 2)];
 	_city setVariable ["occupied",(_x select 3)];
-	_city setVariable ["data_units",(_x select 4)];
+
+	_data_units = (_x select 4);
+	{
+		if ((_x select 0) == 3) then {
+			_x set [7,([_x select 7,3] call btc_fnc_getHouses) select 0];
+		};
+	} forEach _data_units;
+	_city setVariable ["data_units",_data_units];
+
 	_city setVariable ["has_ho",(_x select 5)];
 	_city setVariable ["ho_units_spawned",(_x select 6)];
 	_city setVariable ["ieds",(_x select 7)];

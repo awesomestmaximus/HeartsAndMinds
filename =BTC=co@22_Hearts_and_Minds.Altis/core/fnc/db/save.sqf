@@ -1,8 +1,7 @@
 
 "delete" call OO_fnc_inidbi;
 
-private ["_cities_status","_fobs","_name","_city_status","_array_ho","_data","_ho_markers","_array_cache","_c
-","_fobs","_array_veh","_cargo","_array_obj","_marker"];
+private ["_cities_status","_fobs","_name","_city_status","_array_ho","_data","_ho_markers","_array_cache","_fobs","_array_veh","_cargo","_array_obj","_marker","_lereste","_i","_step","_temp_save","_data_units"];
 
 hint "saving...";
 [[8],"btc_fnc_show_hint"] spawn BIS_fnc_MP;
@@ -31,6 +30,12 @@ _cities_status = [];
 	_city_status pushBack (_x getVariable "spawn_more");
 	_city_status pushBack (_x getVariable "occupied");
 
+	_data_units = _x getVariable "data_units";
+	{
+		if ((_x select 0) == 3) then {
+			_x set [7,getPos (_x select 7)];
+		};
+	} forEach _data_units;
 	_city_status pushBack (_x getVariable "data_units");
 
 	_city_status pushBack (_x getVariable ["has_ho",false]);
@@ -40,7 +45,47 @@ _cities_status = [];
 	_cities_status pushBack _city_status;
 	//diag_log format ["SAVE: %1 - %2",(_x getVariable "id"),(_x getVariable "occupied")];
 } foreach btc_city_all;
-["write", ["environement", "cities", _cities_status]] call OO_fnc_inidbi;
+cities_status = [];
+cities_status append _cities_status;
+
+_lereste = [];
+_lereste append _cities_status;
+_step = count _cities_status;
+_i = 1;
+
+/*hint "b"; ["write", ["environement", "cities3", (((cities_status select 3) select 4) select 4) select 7]] call OO_fnc_inidbi
+ get_group*/
+while {!(_lereste isEqualTo [])} do
+{
+	_temp_save = [];
+	_temp_save append _lereste;
+	player sideChat "str(count _lereste)";
+	player sideChat str(count _lereste);
+	_temp_save resize _step;
+	player sideChat "str(count _temp_save)";
+	player sideChat str(count _temp_save);
+	switch (["write", ["environement", format ["cities_%1",_i], _temp_save]] call OO_fnc_inidbi) do
+	{
+		case true:
+		{
+		_lereste deleteRange [0,_step];
+		if (count _lereste < _step) then {_step = count _lereste};
+		_i = _i + 1;
+		};
+
+		case nil:
+		{
+		player sideChat "HELLLLLLLOOOO";
+		_step = floor(_step/2);
+		};
+
+		default
+		{
+		player sideChat "HELLLLLLLOOOO";
+		_step = floor(_step/2);
+		};
+	};
+};
 
 //HIDEOUT
 _array_ho = [];
