@@ -4,7 +4,11 @@ private ["_cities_status","_fobs","_name","_city_status","_array_ho","_data","_h
 setDate (["read", ["mission_Param", "date", date]] call OO_fnc_inidbi);
 
 //CITIES
-_cities_status = ["read", ["environement", "cities", [] ]] call OO_fnc_inidbi;
+_nb_cities_array = ["read", ["environement", "nb_cities_array", 0]] call OO_fnc_inidbi;
+_cities_status = [];
+for "_i" from 1 to _nb_cities_array do {
+   _cities_status append (["read", ["environement", format ["cities_array_%1",_i], [] ]] call OO_fnc_inidbi);
+};
 //diag_log format ["_cities_status: %1",_cities_status];
 
 {
