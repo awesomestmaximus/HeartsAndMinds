@@ -18,6 +18,7 @@ for "_i" from 0 to (count btc_city_all - 1) do {
 hint "saving...2";
 //City status
 _cities_status = [];
+_nb_cities_data_units = [];
 {
 	//[151,false,false,true,false,false,[]]
 	_city_status = [];
@@ -38,7 +39,7 @@ _cities_status = [];
 			_x set [7,getPos (_x select 7)];
 		};
 	} forEach _data_units;
-	_city_status pushBack _data_units;
+	_nb_cities_data_units pushBack ([_data_units,"environement",format ["city_%1_data_units",(_city_status select 0)]] call btc_fnc_db_save_array);
 
 	_city_status pushBack (_x getVariable ["has_ho",false]);
 	_city_status pushBack (_x getVariable ["ho_units_spawned",false]);
@@ -47,9 +48,12 @@ _cities_status = [];
 	_cities_status pushBack _city_status;
 	//diag_log format ["SAVE: %1 - %2",(_x getVariable "id"),(_x getVariable "occupied")];
 } foreach btc_city_all;
-cities_status = +_cities_status;
+["write", ["environement", "nb_cities_data_units", _nb_cities_data_units]] call OO_fnc_inidbi;
 
-[_cities_status,"environement","cities_array" ] call btc_fnc_db_save_array;
+cities_status = +_cities_status;
+_nb_cities_status = [[_cities_status,"environement","cities_status"] call btc_fnc_db_save_array];
+["write", ["environement", "nb_cities_status", _nb_cities_status]] call OO_fnc_inidbi;
+
 
 //HIDEOUT
 _array_ho = [];

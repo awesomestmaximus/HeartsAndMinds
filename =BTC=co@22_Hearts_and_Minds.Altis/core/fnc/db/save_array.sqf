@@ -10,6 +10,12 @@ _nb_cities_array = 0;
 
 while {!(_lereste isEqualTo [])} do
 {
+	if (_step isEqualTo 0) exitWith {
+		hint "Error Array too big";
+		lereste = +_lereste;
+		_nb_cities_array ="Error Array too big";
+	};
+
 	_temp_save = +_lereste;
 	player sideChat "str(count _lereste)";
 	player sideChat str(count _lereste);
@@ -23,17 +29,14 @@ while {!(_lereste isEqualTo [])} do
 			if (count _lereste < _step) then {_step = count _lereste};
 			_nb_cities_array = _nb_cities_array + 1;
 		};
-
 		case nil:
 		{
 			_step = floor(_step/2);
 		};
-
 		default
 		{
 			_step = floor(_step/2);
 		};
 	};
-if (_step isEqualTo 0) exitWith {hint "Error Array too big"};
 };
-["write", [_section, format ["nb_%1",_key], _nb_cities_array]] call OO_fnc_inidbi;
+_nb_cities_array
