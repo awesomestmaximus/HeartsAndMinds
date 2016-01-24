@@ -49,44 +49,7 @@ _cities_status = [];
 } foreach btc_city_all;
 cities_status = +_cities_status;
 
-_lereste = +_cities_status;
-_step = count _cities_status;
-_nb_cities_array = 0;
-
-/*hint "b"; ["write", ["environement", "cities3", (((cities_status select 3) select 4) select 4) select 7]] call OO_fnc_inidbi
- get_group*/
-while {!(_lereste isEqualTo [])} do
-{
-	_temp_save = +_lereste;
-	player sideChat "str(count _lereste)";
-	player sideChat str(count _lereste);
-	_temp_save resize _step;
-	player sideChat "str(count _temp_save)";
-	player sideChat str(count _temp_save);
-	switch (["write", ["environement", format ["cities_array_%1",_nb_cities_array], _temp_save]] call OO_fnc_inidbi) do	{
-		case true:
-		{
-			_lereste deleteRange [0,_step];
-			if (count _lereste < _step) then {_step = count _lereste};
-			_nb_cities_array = _nb_cities_array + 1;
-		};
-
-		case nil:
-		{
-			player sideChat "HELLLLLLLOOOO";
-			_step = floor(_step/2);
-		};
-
-		default
-		{
-			player sideChat "HELLLLLLLOOOO";
-			_step = floor(_step/2);
-		};
-	};
-if (_step isEqualTo 0) exitWith {hint "Error Array too big"};
-};
-["write", ["environement", "nb_cities_array", _nb_cities_array]] call OO_fnc_inidbi;
-
+[_cities_status,"environement","cities_array" ] call btc_fnc_db_save_array;
 
 //HIDEOUT
 _array_ho = [];
