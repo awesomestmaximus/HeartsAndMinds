@@ -18,12 +18,15 @@ for "_i" from 0 to (count btc_city_all - 1) do {
 hint "saving...2";
 //City status
 _cities_status = [];
-_nb_cities_data_units = [];
+_nb_cities_data_units = [[],[]];
 {
 	//[151,false,false,true,false,false,[]]
+	private ["_id"];
 	_city_status = [];
-	_city_status pushBack (_x getVariable "id");
-
+	_id = (_x getVariable "id");
+	_city_status pushBack _id ;
+	(_nb_cities_data_units select 0) pushBack _id;
+	diag_log str(_id);
 	//_city_status pushBack (_x getVariable "name");
 
 	_city_status pushBack (_x getVariable "initialized");
@@ -34,12 +37,14 @@ _nb_cities_data_units = [];
 	_data_units = +(_x getVariable "data_units");
 	{
 		if ((_x select 0) isEqualTo 3) then {
+			diag_log str(_x select 7);
+			diag_log str(getPos (_x select 7));
 			player sideChat str(_x select 7);
 			player sideChat str(getPos (_x select 7));
 			_x set [7,getPos (_x select 7)];
 		};
 	} forEach _data_units;
-	_nb_cities_data_units pushBack ([_data_units,"environement",format ["city_%1_data_units",(_city_status select 0)]] call btc_fnc_db_save_array);
+	(_nb_cities_data_units select 1) pushBack ([_data_units,"environement",format ["city_%1_data_units",(_city_status select 0)]] call btc_fnc_db_save_array);
 
 	_city_status pushBack (_x getVariable ["has_ho",false]);
 	_city_status pushBack (_x getVariable ["ho_units_spawned",false]);
