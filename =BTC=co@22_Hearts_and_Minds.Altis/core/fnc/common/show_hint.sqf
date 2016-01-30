@@ -15,7 +15,7 @@ switch (_type) do {
 	case 3 : {
 		hint "This body does not have any intel";
 	};
-	case 4 : {	
+	case 4 : {
 		hint "Found intels about an ammo cache and an hideout! Map updated";
 	};
 	case 5 : {
@@ -35,5 +35,8 @@ switch (_type) do {
 	};
 	case 10 : {
 		hint "Database deleted!";
+	};
+	case 11 : {
+		hint ("Game not " + (_this select 1) + " because @iniDB isn't lauched server side!");
 	};
 };

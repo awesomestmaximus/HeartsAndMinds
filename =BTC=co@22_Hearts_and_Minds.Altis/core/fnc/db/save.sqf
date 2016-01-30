@@ -1,3 +1,4 @@
+if ((call OO_fnc_inidbi) isEqualTo false) exitWith {[[11, "saved"],"btc_fnc_show_hint"] spawn BIS_fnc_MP;};
 
 "delete" call OO_fnc_inidbi;
 
