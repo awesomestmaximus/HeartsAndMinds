@@ -133,12 +133,15 @@ _array_ho = ["read", ["environement", "ho", [] ]] call OO_fnc_inidbi;
 	btc_hideouts pushBack _hideout;
 } foreach _array_ho;
 
-_ho = btc_hideouts select 0;
-_id_inidbi = ["read", ["environement", "ho_sel", 0]] call OO_fnc_inidbi;
-{if ((_x getVariable ["id",0]) == _id_inidbi) exitWith {_ho = _x}} forEach btc_hideouts;
-btc_hq setVariable ["info_hideout",_ho];
-
-if (count btc_hideouts == 0) then {[] execVM "core\fnc\common\final_phase.sqf";};
+if (btc_hideouts isEqualTo []) then {
+	[] execVM "core\fnc\common\final_phase.sqf";
+	btc_hq setVariable ["info_hideout",objNull];
+} else {
+	_ho = btc_hideouts select 0;
+	_id_inidbi = ["read", ["environement", "ho_sel", 0]] call OO_fnc_inidbi;
+	{if ((_x getVariable ["id",0]) isEqualTo _id_inidbi) exitWith {_ho = _x}} forEach btc_hideouts;
+	btc_hq setVariable ["info_hideout",_ho];
+};
 
 //CACHE
 player sideChat "Load Cache";
