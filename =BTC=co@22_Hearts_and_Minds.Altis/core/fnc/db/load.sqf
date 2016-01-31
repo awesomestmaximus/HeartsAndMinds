@@ -180,7 +180,7 @@ if (btc_debug) then {
 btc_global_reputation = ["read", ["environement", "rep", 0 ]] call OO_fnc_inidbi;
 
 //FOB
-_fobs = ["read", ["environement", "fobs", [] ]] call OO_fnc_inidbi;
+_fobs = ["read", ["base", "fobs", [] ]] call OO_fnc_inidbi;
 _fobs_loaded = [];
 
 {
