@@ -27,7 +27,6 @@ _nb_cities_data_units = [[],[]];
 	_id = (_x getVariable "id");
 	_city_status pushBack _id ;
 	(_nb_cities_data_units select 0) pushBack _id;
-	diag_log str(_id);
 	//_city_status pushBack (_x getVariable "name");
 
 	_city_status pushBack (_x getVariable "initialized");
@@ -38,10 +37,6 @@ _nb_cities_data_units = [[],[]];
 	_data_units = +(_x getVariable "data_units");
 	{
 		if ((_x select 0) isEqualTo 3) then {
-			diag_log str(_x select 7);
-			diag_log str(getPos (_x select 7));
-			player sideChat str(_x select 7);
-			player sideChat str(getPos (_x select 7));
 			_x set [7,getPos (_x select 7)];
 		};
 	} forEach _data_units;
@@ -115,9 +110,13 @@ _fobs = [];
 //Vehicles status
 _array_veh = [];
 {
+	private ["_pos"];
 	_data = [];
 	_data pushBack (typeOf _x);
-	_data pushBack (getPos _x);
+
+	_pos = getPos _x;
+	_data pushBack ([_pos select 0, _pos select 1, [0,_pos select 2] select ((_pos select 1) < 0) ]);
+
 	_data pushBack (getDir _x);
 	_data pushBack (fuel _x);
 	_data pushBack (damage _x);
@@ -132,7 +131,7 @@ _array_veh = [];
 //Objects status
 _array_obj = [];
 {
-	if (!isNil {_x getVariable "loaded"} || !Alive _x || isNull _x) exitWith {};
+	if !(!isNil {_x getVariable "loaded"} || !Alive _x || isNull _x) then {
 	_data = [];
 	_data pushBack (typeOf _x);
 	_data pushBack (getPosASL _x);
@@ -141,6 +140,7 @@ _array_obj = [];
 	{_cargo pushBack (typeOf _x)} foreach (_x getVariable ["cargo",[]]);
 	_data pushBack _cargo;
 	_array_obj pushBack _data;
+	};
 } foreach btc_log_obj_created;
 ["write", ["base", "objs", _array_obj]] call OO_fnc_inidbi;
 

@@ -16,13 +16,7 @@ while {!(_lereste isEqualTo [])} do
 	};
 
 	_temp_save = +_lereste;
-	player sideChat "str(count _lereste)";
-	player sideChat str(count _lereste);
 	_temp_save resize _step;
-	player sideChat "str(count _temp_save)";
-	player sideChat str(count _temp_save);
-	diag_log str(typeName _temp_save);
-	diag_log str(count _temp_save);
 	switch (["write", [_section, format ["%1_%2",_key,_nb_cities_array], _temp_save]] call OO_fnc_inidbi) do	{
 		case true:
 		{
