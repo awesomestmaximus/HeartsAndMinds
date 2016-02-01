@@ -5,16 +5,14 @@ private ["_cities_status","_fobs","_name","_city_status","_array_ho","_data","_h
 setDate (["read", ["mission_Param", "date", date]] call OO_fnc_inidbi);
 
 //CITIES
-player sideChat "Load Cities";
-_nb_cities_status = ((["read", ["environement", "nb_cities_status", [0]]] call OO_fnc_inidbi) select 0) - 1;
+_nb_cities_status = ((["read", ["cities", "nb_cities_status", [0]]] call OO_fnc_inidbi) select 0) - 1;
 _cities_status = [];
 for "_i" from 0 to _nb_cities_status do {
-	_cities_status append (["read", ["environement", format ["cities_status_%1",_i], [] ]] call OO_fnc_inidbi);
+	_cities_status append (["read", ["cities", format ["cities_status_%1",_i], [] ]] call OO_fnc_inidbi);
 };
 
-_nb_cities_data_units = ["read", ["environement", "nb_cities_data_units", [[],[]] ]] call OO_fnc_inidbi;
+_nb_cities_data_units = ["read", ["cities", "nb_cities_data_units", [[],[]] ]] call OO_fnc_inidbi;
 //diag_log format ["_cities_status: %1",_cities_status];
-player sideChat "Load Cities data units";
 {
 /*
 	_city_status pushBack (_x getVariable "id");
@@ -42,10 +40,9 @@ player sideChat "Load Cities data units";
 
 	_element = (_nb_cities_data_units select 1) select ((_nb_cities_data_units select 0) find _id);
 	_data_units = [];
-	player sideChat str(_element);
 	if (_element > 0) then {
 		for "_i" from 0 to _element do {
-			_data_units append (["read", ["environement", format ["city_%1_data_units_%2",_id,_i], [] ]] call OO_fnc_inidbi);
+			_data_units append (["read", ["cities", format ["city_%1_data_units_%2",_id,_i], [] ]] call OO_fnc_inidbi);
 		};
 	};
 	{
@@ -57,7 +54,6 @@ player sideChat "Load Cities data units";
 
 	_city setVariable ["has_ho",(_x select 4)];
 	_city setVariable ["ho_units_spawned",(_x select 5)];
-	diag_log str(_x select 6);
 	_city setVariable ["ieds",(_x select 6)];
 
 	if (btc_debug) then	{//_debug
@@ -72,7 +68,6 @@ player sideChat "Load Cities data units";
 } foreach _cities_status;
 
 //HIDEOUT
-player sideChat "Load HideOuts";
 /*
 	_data pushBack (getPos _x);
 	_data pushBack (_x getVariable ["id",0]);
@@ -88,7 +83,7 @@ player sideChat "Load HideOuts";
 	} foreach (_x getVariable ["markers",[]]);
 	_data pushback (_cache_markers);
 */
-_array_ho = ["read", ["environement", "ho", [] ]] call OO_fnc_inidbi;
+_array_ho = ["read", ["cities", "ho", [] ]] call OO_fnc_inidbi;
 
 {
 	_pos = (_x select 0);
@@ -138,17 +133,16 @@ if (btc_hideouts isEqualTo []) then {
 	btc_hq setVariable ["info_hideout",objNull];
 } else {
 	_ho = btc_hideouts select 0;
-	_id_inidbi = ["read", ["environement", "ho_sel", 0]] call OO_fnc_inidbi;
+	_id_inidbi = ["read", ["cities", "ho_sel", 0]] call OO_fnc_inidbi;
 	{if ((_x getVariable ["id",0]) isEqualTo _id_inidbi) exitWith {_ho = _x}} forEach btc_hideouts;
 	btc_hq setVariable ["info_hideout",_ho];
 };
 
 //CACHE
-player sideChat "Load Cache";
 btc_cache_cities = + btc_city_all;
 btc_cache_markers = [];
 
-_array_cache = ["read", ["environement", "cache", [] ]] call OO_fnc_inidbi;
+_array_cache = ["read", ["cities", "cache", [] ]] call OO_fnc_inidbi;
 
 btc_cache_pos = _array_cache select 0;
 btc_cache_n = _array_cache select 1;
@@ -180,7 +174,7 @@ if (btc_debug) then {
 };
 
 //REP
-btc_global_reputation = ["read", ["environement", "rep", 0 ]] call OO_fnc_inidbi;
+btc_global_reputation = ["read", ["cities", "rep", 0 ]] call OO_fnc_inidbi;
 
 //FOB
 _fobs = ["read", ["base", "fobs", [] ]] call OO_fnc_inidbi;

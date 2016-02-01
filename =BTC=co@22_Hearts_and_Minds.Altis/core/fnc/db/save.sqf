@@ -18,6 +18,7 @@ for "_i" from 0 to (count btc_city_all - 1) do {
 };
 hint "saving...2";
 //City status
+hint "saving City status";
 _cities_status = [];
 _nb_cities_data_units = [[],[]];
 {
@@ -40,7 +41,7 @@ _nb_cities_data_units = [[],[]];
 			_x set [7,getPos (_x select 7)];
 		};
 	} forEach _data_units;
-	(_nb_cities_data_units select 1) pushBack ([_data_units,"environement",format ["city_%1_data_units",(_city_status select 0)]] call btc_fnc_db_save_array);
+	(_nb_cities_data_units select 1) pushBack ([_data_units,"cities",format ["city_%1_data_units",(_city_status select 0)]] call btc_fnc_db_save_array);
 
 	_city_status pushBack (_x getVariable ["has_ho",false]);
 	_city_status pushBack (_x getVariable ["ho_units_spawned",false]);
@@ -49,14 +50,14 @@ _nb_cities_data_units = [[],[]];
 	_cities_status pushBack _city_status;
 	//diag_log format ["SAVE: %1 - %2",(_x getVariable "id"),(_x getVariable "occupied")];
 } foreach btc_city_all;
-["write", ["environement", "nb_cities_data_units", _nb_cities_data_units]] call OO_fnc_inidbi;
+["write", ["cities", "nb_cities_data_units", _nb_cities_data_units]] call OO_fnc_inidbi;
 
-cities_status = +_cities_status;
-_nb_cities_status = [[_cities_status,"environement","cities_status"] call btc_fnc_db_save_array];
-["write", ["environement", "nb_cities_status", _nb_cities_status]] call OO_fnc_inidbi;
+_nb_cities_status = [[_cities_status,"cities","cities_status"] call btc_fnc_db_save_array];
+["write", ["cities", "nb_cities_status", _nb_cities_status]] call OO_fnc_inidbi;
 
 
 //HIDEOUT
+hint "saving HIDEOUT";
 _array_ho = [];
 {
 	_data = [];
@@ -76,11 +77,12 @@ _array_ho = [];
 	diag_log format ["HO %1 DATA %2",_x,_data];
 	_array_ho pushBack _data;
 } foreach btc_hideouts;
-["write", ["environement", "ho", _array_ho]] call OO_fnc_inidbi;
+["write", ["cities", "ho", _array_ho]] call OO_fnc_inidbi;
 
-["write", ["environement", "ho_sel", (btc_hq getVariable ["info_hideout",objNull]) getVariable ["id",0] ]] call OO_fnc_inidbi;
+["write", ["cities", "ho_sel", (btc_hq getVariable ["info_hideout",objNull]) getVariable ["id",0] ]] call OO_fnc_inidbi;
 
 //CACHE
+hint "saving CACHE";
 _array_cache = [];
 _array_cache pushback (getposATL btc_cache_obj);
 _array_cache pushback (btc_cache_n);
@@ -93,10 +95,10 @@ _cache_markers = [];
 	_cache_markers pushBack _data;
 } foreach btc_cache_markers;
 _array_cache pushback (_cache_markers);
-["write", ["environement", "cache", _array_cache]] call OO_fnc_inidbi;
+["write", ["cities", "cache", _array_cache]] call OO_fnc_inidbi;
 
 //rep status
-["write", ["environement", "rep", btc_global_reputation]] call OO_fnc_inidbi;
+["write", ["cities", "rep", btc_global_reputation]] call OO_fnc_inidbi;
 
 //FOBS
 _fobs = [];
