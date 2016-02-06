@@ -124,14 +124,14 @@ _array_veh = [];
 _array_obj = [];
 {
 	if !(!isNil {_x getVariable "loaded"} || !Alive _x || isNull _x) then {
-	_data = [];
-	_data pushBack (typeOf _x);
-	_data pushBack (getPosASL _x);
-	_data pushBack (getDir _x);
-	_cargo = [];
-	{_cargo pushBack (typeOf _x)} foreach (_x getVariable ["cargo",[]]);
-	_data pushBack _cargo;
-	_array_obj pushBack _data;
+		_data = [];
+		_data pushBack (typeOf _x);
+		_data pushBack (getPosASL _x);
+		_data pushBack (getDir _x);
+		_cargo = [];
+		{_cargo pushBack (typeOf _x)} foreach (_x getVariable ["cargo",[]]);
+		_data pushBack _cargo;
+		_array_obj pushBack _data;
 	};
 } foreach btc_log_obj_created;
 ["write", ["base", "objs", _array_obj]] call OO_fnc_inidbi;

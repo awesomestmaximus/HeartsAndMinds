@@ -2,8 +2,14 @@
 private ["_array_of_string","_range","_size_array","_string_of_array"];
 
 _string_of_array = str(_this);
-
 _size_array = count _string_of_array;
+
+_Doublequotation_pos = _string_of_array find '"';
+while {!(_Doublequotation_pos isEqualTo -1)} do	{
+	_string_of_array = (_string_of_array select [0, _Doublequotation_pos]) + "'" + (_string_of_array select [_Doublequotation_pos + 1, _size_array]);
+	_Doublequotation_pos = _string_of_array find '"';
+};
+
 _range = floor(_size_array/SIZESTRING);
 _array_of_string = [];
 
