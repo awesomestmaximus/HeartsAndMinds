@@ -2,7 +2,7 @@ if !(isClass(configFile >> "cfgPatches" >> "inidbi2")) exitWith {[[11, "saved"],
 
 "delete" call OO_fnc_inidbi;
 
-private ["_cities_status","_fobs","_name","_city_status","_array_ho","_data","_ho_markers","_array_cache","_fobs","_array_veh","_cargo","_array_obj","_marker","_lereste","_nb_cities_array","_step","_temp_save","_data_units"];
+private ["_cities_status","_fobs","_city_status","_array_ho","_data","_ho_markers","_array_cache","_array_veh","_cargo","_array_obj","_marker","_data_units"];
 
 hint "saving...";
 [[8],"btc_fnc_show_hint"] spawn BIS_fnc_MP;

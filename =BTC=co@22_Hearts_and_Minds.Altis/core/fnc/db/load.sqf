@@ -1,6 +1,6 @@
 if !(isClass(configFile >> "cfgPatches" >> "inidbi2")) exitWith {[[11, "loaded"],"btc_fnc_show_hint"] spawn BIS_fnc_MP;};
 
-private ["_cities_status","_fobs","_name","_city_status","_array_ho","_data","_ho_markers","_array_cache","_fobs","_array_veh","_cargo","_array_obj","_marker","_ho","_data_units"];
+private ["_cities_status","_name","_array_ho","_array_cache","_fobs","_marker","_ho","_data_units"];
 
 setDate (["read", ["mission_Param", "date", date]] call OO_fnc_inidbi);
 
