@@ -1,21 +1,9 @@
-disabledAI=1;
-respawn = "BASE";
-respawndelay = "30";
 
 loadScreen = "core\img\btc.paa";
 author = Giallustio;
 onLoadName = Hearts and Minds;
 onLoadMission = www.blacktemplars.altervista.org;
-
 enableDebugConsole = 1;
-
-class Header
-{
-	gameType = COOP;
-	minPlayers = 1;
-	maxPlayers = 22;
-};
-
 #include "core\def\dlg_def.hpp"
 
 #include "core\fnc\fob\dlg.hpp"

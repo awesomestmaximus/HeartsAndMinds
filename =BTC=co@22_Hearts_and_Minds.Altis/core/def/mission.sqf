@@ -84,7 +84,7 @@ if (isServer) then {
 	btc_log_cargo_repo = "Land_HBarrierBig_F" createVehicle [- 5000,- 5000,0];
 
 	//Patrol
-	btc_patrol_max = 5;
+	btc_patrol_max = 8;
 	btc_patrol_active = [];
 	btc_patrol_area = 2500;
 
