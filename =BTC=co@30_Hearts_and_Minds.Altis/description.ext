@@ -1,4 +1,3 @@
-
 loadScreen = "core\img\btc.paa";
 author = Giallustio;
 onLoadName = Hearts and Minds;

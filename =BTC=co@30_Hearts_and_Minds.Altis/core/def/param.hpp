@@ -39,7 +39,7 @@ class Params {
         title = "Everybody can disarm IED with the same chances:";
         values[]={0,1};
         texts[]={"No","Yes"};
-        default = 0;
+        default = 1;
     };
 	class btc_p_hideout_n {
 	//paramsArray[6]
@@ -88,7 +88,7 @@ class Params {
 	   title = "Medical Level";
 	   values[] = {1,2};
 	   texts[] = {"Basic","Advanced"};
-	   default = 1;
+	   default = 2;
 	};
 	class btc_p_adv_wounds {
 		//paramsArray[13]
@@ -102,7 +102,7 @@ class Params {
         title = "Revive time:";
         values[]={0,60,120,180,240,300,600,900,1200,999999};
         texts[]={"0","60","120","180","240","300","600","900","1200","999999"};
-        default = 600;
+        default = 0;
     };
     class btc_p_set_skill {
 	//paramsArray[15]
