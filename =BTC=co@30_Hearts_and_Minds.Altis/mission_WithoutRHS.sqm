@@ -17,9 +17,9 @@ class EditorData
 	class Camera
 	{
 		pos[]={8224.875,102.228,10008.229};
-		dir[]={-0.66570485,-0.45667222,-0.59016222};
-		up[]={-0.34172559,0.88963395,-0.30294728};
-		aside[]={-0.6633746,-1.8067658e-007,0.74828959};
+		dir[]={0.77152663,-0.4798812,0.41769484};
+		up[]={0.42201045,0.87733161,0.22847122};
+		aside[]={0.47609472,-1.7217826e-007,-0.87939936};
 	};
 };
 binarizationWanted=0;
@@ -79,24 +79,6 @@ class CustomAttributes
 		name="Multiplayer";
 		class Attribute0
 		{
-			property="RespawnTemplates";
-			expression="true";
-			class Value
-			{
-				class data
-				{
-					class type
-					{
-						type[]=
-						{
-							"ARRAY"
-						};
-					};
-				};
-			};
-		};
-		class Attribute1
-		{
 			property="RespawnButton";
 			expression="true";
 			class Value
@@ -111,6 +93,24 @@ class CustomAttributes
 						};
 					};
 					value=1;
+				};
+			};
+		};
+		class Attribute1
+		{
+			property="RespawnTemplates";
+			expression="true";
+			class Value
+			{
+				class data
+				{
+					class type
+					{
+						type[]=
+						{
+							"ARRAY"
+						};
+					};
 				};
 			};
 		};
@@ -654,14 +654,15 @@ class Mission
 					class PositionInfo
 					{
 						position[]={8327.1299,75.941444,10070.935};
-						angles[]={0,5.7764363,0};
+						angles[]={0,5.7764287,0};
 					};
 					side="West";
 					flags=2;
 					class Attributes
 					{
 						skill=0.60000002;
-						description="Medic";
+						init="this setVariable [""interpreter"",true]";
+						description="Medic/Interpreter";
 						isPlayable=1;
 					};
 					id=43;
@@ -814,14 +815,15 @@ class Mission
 					class PositionInfo
 					{
 						position[]={8318.1416,75.870224,10066.575};
-						angles[]={0.046633169,5.7764363,0};
+						angles[]={0.046635196,5.7764287,0};
 					};
 					side="West";
 					flags=2;
 					class Attributes
 					{
 						skill=0.60000002;
-						description="Medic";
+						init="this setVariable [""interpreter"",true]";
+						description="Medic/Interpreter";
 						isPlayable=1;
 					};
 					id=53;
