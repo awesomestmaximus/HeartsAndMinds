@@ -275,6 +275,12 @@ _objs = profileNamespace getVariable [format ["btc_hm_%1_objs",_name],[]];
 	_obj = (_x select 0) createVehicle (_x select 1);
 	btc_log_obj_created = btc_log_obj_created + [_obj];
 	btc_curator addCuratorEditableObjects [[_obj], false];
+	if (((_x select 0) == "B_CargoNet_01_ammo_F") || ((_x select 0) == "Box_NATO_AmmoVeh_F")) then	{
+		_obj setMass 500;
+	};
+	if (((_x select 0) == btc_supplies_mat) || ((_x select 0) == btc_fob_mat)) then {
+		_obj setMass 2000;
+	};
 	_obj setDir (_x select 2);
 	_obj setPosASL (_x select 1);
 	{
