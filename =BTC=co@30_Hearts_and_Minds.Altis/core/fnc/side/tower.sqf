@@ -5,13 +5,13 @@ _useful = btc_city_all select {(_x getVariable ["occupied",false] && {_x getVari
 
 if (_useful isEqualTo []) exitWith {[] spawn btc_fnc_side_create;};
 
-_city = _useful select (floor random count _useful);
+_city = selectRandom _useful;
 
 _pos = [getPos _city, 100] call btc_fnc_randomize_pos;
 
 _roads = _pos nearRoads 100;
 
-if (count _roads > 0) then {_road = (_roads select (floor random count _roads));
+if (count _roads > 0) then {_road = selectRandom _roads;
 	_pos = getPos _road;
 	};
 
@@ -40,7 +40,7 @@ _marker setmarkertype "hd_flag";
 _marker setmarkertext "Radio Tower";
 _marker setMarkerSize [0.6, 0.6];
 
-_tower_type = btc_type_tower select (floor (random (count btc_type_tower)));
+_tower_type = selectRandom btc_type_tower;
 
 _tower = createVehicle [_tower_type, _pos, [], 0, "NONE"];
 _tower setDir (_direction);
