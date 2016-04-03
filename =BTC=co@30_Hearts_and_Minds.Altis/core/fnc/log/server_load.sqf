@@ -1,6 +1,4 @@
 
-private ["_obj","_veh","_cargo"];
-
 _obj = _this select 0;
 _veh = _this select 1;
 
