@@ -8,7 +8,7 @@ class EditorData
 	toggles=1;
 	class ItemIDProvider
 	{
-		nextID=173;
+		nextID=174;
 	};
 	class MarkerIDProvider
 	{
@@ -16,10 +16,10 @@ class EditorData
 	};
 	class Camera
 	{
-		pos[]={8224.875,102.228,10008.229};
-		dir[]={0.87267667,-0.30856577,-0.37846828};
-		up[]={0.28310138,0.95120049,-0.12277711};
-		aside[]={-0.39788544,-6.5710628e-007,-0.91744572};
+		pos[]={8126.8159,253.05197,9920.8291};
+		dir[]={0.54935634,-0.76851505,0.32804626};
+		up[]={0.65983087,0.63982624,0.39401558};
+		aside[]={0.51269817,4.4587068e-008,-0.85858381};
 	};
 };
 binarizationWanted=0;
@@ -56,7 +56,8 @@ addons[]=
 	"ace_nametags",
 	"ace_mk6mortar",
 	"ace_weather",
-	"ace_sitting"
+	"ace_sitting",
+	"ace_rearm"
 };
 randomSeed=2442963;
 class ScenarioData
@@ -79,24 +80,6 @@ class CustomAttributes
 		name="Multiplayer";
 		class Attribute0
 		{
-			property="RespawnTemplates";
-			expression="true";
-			class Value
-			{
-				class data
-				{
-					class type
-					{
-						type[]=
-						{
-							"ARRAY"
-						};
-					};
-				};
-			};
-		};
-		class Attribute1
-		{
 			property="RespawnButton";
 			expression="true";
 			class Value
@@ -111,6 +94,24 @@ class CustomAttributes
 						};
 					};
 					value=1;
+				};
+			};
+		};
+		class Attribute1
+		{
+			property="RespawnTemplates";
+			expression="true";
+			class Value
+			{
+				class data
+				{
+					class type
+					{
+						type[]=
+						{
+							"ARRAY"
+						};
+					};
 				};
 			};
 		};
@@ -166,7 +167,7 @@ class Mission
 	};
 	class Entities
 	{
-		items=75;
+		items=76;
 		class Item0
 		{
 			dataType="Marker";
@@ -4041,6 +4042,40 @@ class Mission
 					};
 				};
 				nAttributes=2;
+			};
+		};
+		class Item75
+		{
+			dataType="Logic";
+			class PositionInfo
+			{
+				position[]={9168.3965,-21.196066,10290.506};
+				angles[]={6.118042,0,6.102509};
+			};
+			id=173;
+			type="ACE_moduleRearmSettings";
+			class CustomAttributes
+			{
+				class Attribute0
+				{
+					property="ACE_moduleRearmSettings_level";
+					expression="_this setVariable ['level',_value,true];";
+					class Value
+					{
+						class data
+						{
+							class type
+							{
+								type[]=
+								{
+									"SCALAR"
+								};
+							};
+							value=1;
+						};
+					};
+				};
+				nAttributes=1;
 			};
 		};
 	};
