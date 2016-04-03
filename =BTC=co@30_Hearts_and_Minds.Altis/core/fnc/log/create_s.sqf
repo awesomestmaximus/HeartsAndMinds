@@ -6,7 +6,14 @@ if (count _this > 1) then {
 } else {
 	_pos = getpos btc_create_object_point;
 };
-_obj = (_this select 0) createVehicle [_pos select 0,_pos select 1,0];
+
+if (getText (configFile >> "cfgVehicles" >> (_this select 0) >> "displayName") isEqualTo "") then {
+	_obj = [btc_create_object_point,(_this select 0)] call ace_rearm_fnc_createDummy;
+	_obj setPos _pos;
+} else {
+	_obj = (_this select 0) createVehicle [_pos select 0,_pos select 1,0];
+};
+
 if (((_this select 0) == "B_CargoNet_01_ammo_F") || ((_this select 0) == "Box_NATO_AmmoVeh_F")) then {
 	_obj setMass 500;
 };
