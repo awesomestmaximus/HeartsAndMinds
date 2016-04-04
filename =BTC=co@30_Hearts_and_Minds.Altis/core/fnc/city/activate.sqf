@@ -67,6 +67,8 @@ if (count _data_units > 0) then {
 		_groups = ceil ((1 + _n) * _ratio);
 		//hint ("SPAWNING" + str(_groups) + " ---- " + str(_n));
 		//for "_i" from 1 to (_groups) do {[_city,_radius,(random _ratio),(random 1)] spawn btc_fnc_mil_create_group;sleep 0.5;};
+		[_city,_radius,(random _ratio),0.2] call btc_fnc_mil_create_group;
+		[_city,_radius,(random _ratio),0.2] call btc_fnc_mil_create_group;
 		for "_i" from 1 to (_groups) do {[_city,_radius,(random _ratio),(random 1)] call btc_fnc_mil_create_group;};
 
 		_trigger = createTrigger["EmptyDetector",getPos _city];
