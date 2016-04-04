@@ -11,7 +11,7 @@ class Params {
         title = "Acceleration time multiplier:";
 		values[]={1,2,3,4,5,6,7,8,9,10,11,12};
 		texts[]={"1","2","3","4","5","6","7","8","9","10","11","12"};
-		default = 5;
+		default = 1;
 	};
 	class btc_p_load {
     //paramsArray[2]

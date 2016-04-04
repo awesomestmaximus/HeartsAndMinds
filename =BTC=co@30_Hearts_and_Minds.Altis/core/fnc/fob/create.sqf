@@ -1,6 +1,4 @@
 
-//if (count ((position _this) isflatempty [1,0,0.9,1,0,false,_this]) == 0) exitWith {hint "Area is not flat enough!"};
-
 if (_this distance (getMarkerPos "btc_base") < 2000) exitWith {hint "Too close at the main base!"};
 
 if (count (nearestObjects [position _this, ["LandVehicle","Air"], 10]) > 0) exitWith {hint "Clear the area before mounting the FOB";hint str((nearestObjects [position _this, ["LandVehicle","Air"], 10]));};
