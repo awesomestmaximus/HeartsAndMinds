@@ -1,5 +1,7 @@
 if (isDedicated) exitWith {};
 
+private ["_type"];
+
 _type  = _this select 0;
 
 switch (_type) do {

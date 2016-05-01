@@ -1,6 +1,6 @@
 if !(isClass(configFile >> "cfgPatches" >> "inidbi2")) exitWith {[[11, "loaded"],"btc_fnc_show_hint"] spawn BIS_fnc_MP;};
 
-private ["_cities_status","_name","_array_ho","_array_cache","_fobs","_marker","_ho","_data_units"];
+private ["_name","_cities_status","_array_ho","_ho","_array_cache","_fobs","_fobs_loaded","_vehs","_objs","_data_units"];
 
 setDate (["read", ["mission_Param", "date", date]] call OO_fnc_inidbi);
 
@@ -86,6 +86,8 @@ _nb_cities_data_units = ["read", ["cities", "nb_cities_data_units", [[],[]] ]] c
 _array_ho = ["read", ["cities", "ho", [] ]] call OO_fnc_inidbi;
 
 {
+	private ["_pos","_hideout","_markers"];
+
 	_pos = (_x select 0);
 
 	[_pos,(random 360),btc_composition_hideout] call btc_fnc_create_composition;
@@ -154,6 +156,7 @@ clearWeaponCargoGlobal btc_cache_obj;clearItemCargoGlobal btc_cache_obj;clearMag
 btc_cache_obj addEventHandler ["HandleDamage", btc_fnc_cache_hd_cache];
 
 {
+	private ["_marker"];
 	_marker = createmarker [format ["%1", (_x select 0)], (_x select 0)];
 	_marker setmarkertype "hd_unknown";
 	_marker setMarkerText (_x select 1);
@@ -178,10 +181,9 @@ btc_global_reputation = ["read", ["cities", "rep", 0 ]] call OO_fnc_inidbi;
 
 //FOB
 _fobs = ["read", ["base", "fobs", [] ]] call OO_fnc_inidbi;
-_fobs_loaded = [];
-
+_fobs_loaded = [[],[]];
 {
-	private ["_pos"];
+	private ["_pos","_fob_structure","_flag"];
 	_pos = (_x select 1);
 	createmarker [(_x select 0), _pos];
 	(_x select 0) setMarkerSize [1,1];
@@ -189,10 +191,12 @@ _fobs_loaded = [];
 	(_x select 0) setMarkerText (_x select 0);
 	(_x select 0) setMarkerColor "ColorBlue";
 	(_x select 0) setMarkerShape "ICON";
-	{createVehicle [_x, _pos, [], 0, "NONE"];} foreach [btc_fob_structure,btc_fob_flag];
-	_fobs_loaded pushBack (_x select 0);
-} foreach _fobs;
-
+	_fob_structure = createVehicle [btc_fob_structure, _pos, [], 0, "NONE"];
+	_flag = createVehicle [btc_fob_flag, _pos, [], 0, "NONE"];
+	_flag setVariable ["btc_fob",_x select 0];
+	(_fobs_loaded select 0) pushBack (_x select 0);
+	(_fobs_loaded select 1) pushBack _fob_structure;
+} foreach (_fobs select 0);
 btc_fobs = _fobs_loaded;
 
 //VEHICLES
@@ -218,7 +222,7 @@ diag_log format ["5: %1",(_x select 5)];
 {diag_log format ["5: %1",_x];} foreach (_x select 5)} foreach _vehs;
 */
 {
-	private "_veh";
+	private ["_veh","_cont","_weap","_mags","_items"];
 	_veh = (_x select 0) createVehicle (_x select 1);
 	btc_vehicles pushBack _veh;
 	_veh addEventHandler ["Killed", {_this call btc_fnc_eh_veh_killed}];
@@ -227,12 +231,55 @@ diag_log format ["5: %1",(_x select 5)];
 	_veh setFuel (_x select 3);
 	_veh setDamage (_x select 4);
 	{
-		private "_obj";
-		_obj = _x createVehicle [0,0,0];
-		btc_log_obj_created pushBack _obj;
+		private ["_type","_cargo_obj","_obj","_weap_obj","_mags_obj","_items_obj"];
+		//{_cargo pushBack [(typeOf _x),[getWeaponCargo _x,getMagazineCargo _x,getItemCargo _x]]} foreach (_x getVariable ["cargo",[]]);
+		_type = _x select 0;
+		_cargo_obj = _x select 2;
+		_obj = _type createVehicle [0,0,0];
+		if ((_x select 1) != "") then {_obj setVariable ["ace_rearm_magazineClass",(_x select 1),true]};
+		btc_log_obj_created = btc_log_obj_created + [_obj];
 		btc_curator addCuratorEditableObjects [[_obj], false];
+		clearWeaponCargoGlobal _obj;clearItemCargoGlobal _obj;clearMagazineCargoGlobal _obj;
+		_weap_obj = _cargo_obj select 0;
+		if (count _weap_obj > 0) then {
+			for "_i" from 0 to ((count (_weap_obj select 0)) - 1) do {
+				_obj addWeaponCargoGlobal[((_weap_obj select 0) select _i),((_weap_obj select 1) select _i)];
+			};
+		};
+		_mags_obj = _cargo_obj select 1;
+		if (count _mags_obj > 0) then {
+			for "_i" from 0 to ((count (_mags_obj select 0)) - 1) do {
+				_obj addMagazineCargoGlobal[((_mags_obj select 0) select _i),((_mags_obj select 1) select _i)];
+			};
+		};
+		_items_obj = _cargo_obj select 2;
+		if (count _items_obj > 0) then {
+			for "_i" from 0 to ((count (_items_obj select 0)) - 1) do {
+				_obj addItemCargoGlobal[((_items_obj select 0) select _i),((_items_obj select 1) select _i)];
+			};
+		};
 		[_obj,_veh] call btc_fnc_log_server_load;
 	} foreach (_x select 5);
+	_cont = (_x select 6);
+	clearWeaponCargoGlobal _veh;clearItemCargoGlobal _veh;clearMagazineCargoGlobal _veh;
+	_weap = _cont select 0;
+	if (count _weap > 0) then {
+		for "_i" from 0 to ((count (_weap select 0)) - 1) do {
+			_veh addWeaponCargoGlobal[((_weap select 0) select _i),((_weap select 1) select _i)];
+		};
+	};
+	_mags = _cont select 1;
+	if (count _mags > 0) then {
+		for "_i" from 0 to ((count (_mags select 0)) - 1) do {
+			_veh addMagazineCargoGlobal[((_mags select 0) select _i),((_mags select 1) select _i)];
+		};
+	};
+	_items = _cont select 2;
+	if (count _items > 0) then {
+		for "_i" from 0 to ((count (_items select 0)) - 1) do {
+			_veh addItemCargoGlobal[((_items select 0) select _i),((_items select 1) select _i)];
+		};
+	};
 } foreach _vehs;
 
 //Objs
@@ -251,17 +298,61 @@ diag_log format ["5: %1",(_x select 5)];
 //btc_log_obj_created = [];
 _objs = ["read", ["base", "objs", [] ]] call OO_fnc_inidbi;
 {
-	private "_obj";
+	private ["_obj","_cont","_weap","_mags","_items"];
 	_obj = (_x select 0) createVehicle (_x select 1);
-	btc_log_obj_created pushBack _obj;
+	btc_log_obj_created = btc_log_obj_created + [_obj];
+	btc_curator addCuratorEditableObjects [[_obj], false];
 	_obj setDir (_x select 2);
 	_obj setPosASL (_x select 1);
-	btc_curator addCuratorEditableObjects [[_obj], false];
+	if ((_x select 3) != "") then {_obj setVariable ["ace_rearm_magazineClass",(_x select 3),true]};
 	{
-		private "_l";
-		_l = _x createVehicle [0,0,0];
-		btc_log_obj_created pushBack _l;
+		private ["_type","_cargo_obj","_l","_weap_obj","_mags_obj","_items_obj"];
+		//{_cargo pushBack [(typeOf _x),[getWeaponCargo _x,getMagazineCargo _x,getItemCargo _x]]} foreach (_x getVariable ["cargo",[]]);
+		_type = _x select 0;
+		_cargo_obj = _x select 2;
+		_l = _type createVehicle [0,0,0];
+		if ((_x select 1) != "") then {_l setVariable ["ace_rearm_magazineClass",(_x select 1),true]};
+		btc_log_obj_created = btc_log_obj_created + [_l];
 		btc_curator addCuratorEditableObjects [[_l], false];
+		clearWeaponCargoGlobal _l;clearItemCargoGlobal _l;clearMagazineCargoGlobal _l;
+		_weap_obj = _cargo_obj select 0;
+		if (count _weap_obj > 0) then {
+			for "_i" from 0 to ((count (_weap_obj select 0)) - 1) do {
+				_l addWeaponCargoGlobal[((_weap_obj select 0) select _i),((_weap_obj select 1) select _i)];
+			};
+		};
+		_mags_obj = _cargo_obj select 1;
+		if (count _mags_obj > 0) then {
+			for "_i" from 0 to ((count (_mags_obj select 0)) - 1) do {
+				_l addMagazineCargoGlobal[((_mags_obj select 0) select _i),((_mags_obj select 1) select _i)];
+			};
+		};
+		_items_obj = _cargo_obj select 2;
+		if (count _items_obj > 0) then {
+			for "_i" from 0 to ((count (_items_obj select 0)) - 1) do {
+				_l addItemCargoGlobal[((_items_obj select 0) select _i),((_items_obj select 1) select _i)];
+			};
+		};
 		[_l,_obj] call btc_fnc_log_server_load;
-	} foreach (_x select 3);
+	} foreach (_x select 4);
+	_cont = (_x select 5);
+	clearWeaponCargoGlobal _obj;clearItemCargoGlobal _obj;clearMagazineCargoGlobal _obj;
+	_weap = _cont select 0;
+	if (count _weap > 0) then {
+		for "_i" from 0 to ((count (_weap select 0)) - 1) do {
+			_obj addWeaponCargoGlobal[((_weap select 0) select _i),((_weap select 1) select _i)];
+		};
+	};
+	_mags = _cont select 1;
+	if (count _mags > 0) then {
+		for "_i" from 0 to ((count (_mags select 0)) - 1) do {
+			_obj addMagazineCargoGlobal[((_mags select 0) select _i),((_mags select 1) select _i)];
+		};
+	};
+	_items = _cont select 2;
+	if (count _items > 0) then {
+		for "_i" from 0 to ((count (_items select 0)) - 1) do {
+			_obj addItemCargoGlobal[((_items select 0) select _i),((_items select 1) select _i)];
+		};
+	};
 } foreach _objs;

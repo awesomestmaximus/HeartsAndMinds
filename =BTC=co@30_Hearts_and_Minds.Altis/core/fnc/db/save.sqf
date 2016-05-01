@@ -101,18 +101,18 @@ _array_cache pushback (_cache_markers);
 ["write", ["cities", "rep", btc_global_reputation]] call OO_fnc_inidbi;
 
 //FOBS
-_fobs = [];
+_fobs = [[],[]];
 {
 	private "_pos";
 	_pos = getMarkerPos _x;
-	_fobs pushBack [_x,_pos];
-} foreach btc_fobs;
+	(_fobs select 0) pushBack [_x,_pos];
+} foreach (btc_fobs select 0);
 ["write", ["base", "fobs", _fobs]] call OO_fnc_inidbi;
 
 //Vehicles status
 _array_veh = [];
 {
-	private ["_pos"];
+	private ["_data","_cargo","_cont"];
 	_data = [];
 	_data pushBack (typeOf _x);
 
@@ -123,8 +123,10 @@ _array_veh = [];
 	_data pushBack (fuel _x);
 	_data pushBack (damage _x);
 	_cargo = [];
-	{_cargo pushBack (typeOf _x)} foreach (_x getVariable ["cargo",[]]);
+	{_cargo pushBack [(typeOf _x),(_x getVariable ["ace_rearm_magazineClass",""]),[getWeaponCargo _x,getMagazineCargo _x,getItemCargo _x]]} foreach (_x getVariable ["cargo",[]]);
 	_data pushBack _cargo;
+	_cont = [getWeaponCargo _x,getMagazineCargo _x,getItemCargo _x];
+	_data pushBack _cont;
 	_array_veh pushBack _data;
 	//diag_log format ["VEH %1 DATA %2",_x,_data];
 } foreach btc_vehicles;
@@ -134,19 +136,22 @@ _array_veh = [];
 _array_obj = [];
 {
 	if !(!isNil {_x getVariable "loaded"} || !Alive _x || isNull _x) then {
-	_data = [];
-	_data pushBack (typeOf _x);
-	_data pushBack (getPosASL _x);
-	_data pushBack (getDir _x);
-	_cargo = [];
-	{_cargo pushBack (typeOf _x)} foreach (_x getVariable ["cargo",[]]);
-	_data pushBack _cargo;
-	_array_obj pushBack _data;
+		_data = [];
+		_data pushBack (typeOf _x);
+		_data pushBack (getPosASL _x);
+		_data pushBack (getDir _x);
+		_data pushBack (_x getVariable ["ace_rearm_magazineClass",""]);
+		_cargo = [];
+		{_cargo pushBack [(typeOf _x),(_x getVariable ["ace_rearm_magazineClass",""]),[getWeaponCargo _x,getMagazineCargo _x,getItemCargo _x]]} foreach (_x getVariable ["cargo",[]]);
+		_data pushBack _cargo;
+		_cont = [getWeaponCargo _x,getMagazineCargo _x,getItemCargo _x];
+		_data pushBack _cont;
+
+		_array_obj pushBack _data;
 	};
 } foreach btc_log_obj_created;
 ["write", ["base", "objs", _array_obj]] call OO_fnc_inidbi;
 
-//
 hint "saving...3";
 [[9],"btc_fnc_show_hint"] spawn BIS_fnc_MP;
 
