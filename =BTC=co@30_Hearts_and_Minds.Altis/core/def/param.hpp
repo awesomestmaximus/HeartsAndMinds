@@ -32,7 +32,7 @@ class Params {
         title = "IEDs ratio:";
 		values[]={0, 0.5, 1, 1.5};
 		texts[]={"Off","Low","Normal","High"};
-		default = 1;
+		default = 0.5;
 	};
 	class btc_p_engineer {
     //paramsArray[5]
