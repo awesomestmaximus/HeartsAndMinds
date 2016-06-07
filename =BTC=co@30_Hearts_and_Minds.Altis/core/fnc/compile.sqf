@@ -18,6 +18,7 @@ if (isServer) then {
 	btc_fnc_set_damage = compile preprocessFile "core\fnc\common\set_damage.sqf";
 	btc_fnc_road_direction = compile preprocessFile "core\fnc\common\road_direction.sqf";
 	btc_fnc_deleteTestObj = compile preprocessFile "core\fnc\common\deleteTestObj.sqf";
+	btc_fnc_findsafepos = compile preprocessFile "core\fnc\common\findsafepos.sqf";
 
 	//CITY
 	btc_fnc_city_activate = compile preprocessFile "core\fnc\city\activate.sqf";
