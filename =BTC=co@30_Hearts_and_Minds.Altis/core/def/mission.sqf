@@ -534,6 +534,7 @@ switch (true) do {
 		btc_type_vehicles         = ["btc_am_offroad","btc_am_offroad_armed"];
 		btc_type_boats			= ["I_Boat_Armed_01_minigun_F","I_Boat_Transport_01_F","I_SDV_01_F","I_G_Boat_Transport_01_F"];
 		btc_type_motorized        = ["btc_am_offroad","btc_am_offroad_armed","btc_am_ural","btc_am_ural_open","btc_am_btr60","btc_am_bmd1","btc_am_brm1k"];
+		btc_type_motorized_armed = ["btc_am_offroad_armed","btc_am_ural","btc_am_ural_open","btc_am_btr60","btc_am_bmd1","btc_am_brm1k"];
 		btc_type_mg = ["O_HMG_01_F","O_HMG_01_high_F"];
 		btc_type_gl = ["O_GMG_01_F","O_GMG_01_high_F"];
 	};
@@ -546,6 +547,7 @@ switch (true) do {
 		btc_type_vehicles		= ["aif_offroad","aif_offroad2","aif_car"];
 		btc_type_boats			= ["I_Boat_Armed_01_minigun_F","I_Boat_Transport_01_F","I_SDV_01_F","I_G_Boat_Transport_01_F"];
 		btc_type_motorized		= ["aif_armed","aif_offroad","aif_offroad2","aif_car","aif_truck_ural","aif_truck","aif_heli_MH6","aif_heli_K60","aif_uaz_dshkm","aif_uaz_spg9","aif_apc","aif_uaz_open"];
+		btc_type_motorized_armed = ["aif_armed","aif_heli_MH6","aif_heli_K60","aif_uaz_dshkm","aif_uaz_spg9","aif_apc"];
 		btc_type_mg				= ["aif_Static_M2","aif_Static_M2_MiniTripod"];
 		btc_type_gl				= ["O_GMG_01_F","O_GMG_01_high_F","aif_Static_Mk19_TriPod"];
 	};
@@ -558,6 +560,7 @@ switch (true) do {
 		btc_type_vehicles         = ["I_G_Offroad_01_F","I_G_Offroad_01_armed_F","I_C_Van_01_transport_F","O_T_LSV_02_armed_F","O_T_LSV_02_unarmed_F"];
 		btc_type_boats			= ["I_Boat_Armed_01_minigun_F","I_Boat_Transport_01_F","I_SDV_01_F","I_G_Boat_Transport_01_F","I_C_Boat_Transport_01_F","I_C_Boat_Transport_02_F"];
 		btc_type_motorized        = ["I_G_Offroad_01_F","I_G_Offroad_01_armed_F","I_C_Van_01_transport_F","O_T_LSV_02_armed_F","O_T_LSV_02_unarmed_F","I_Truck_02_transport_F","I_G_Offroad_01_armed_F","I_Truck_02_covered_F"];
+		btc_type_motorized_armed        = ["I_G_Offroad_01_armed_F","I_G_Offroad_01_armed_F","I_MRAP_03_F","I_MRAP_03_hmg_F","I_MRAP_03_gmg_F","I_Heli_light_03_F","I_APC_tracked_03_cannon_F"];
 		btc_type_mg = ["I_HMG_01_F","I_HMG_01_high_F"];
 		btc_type_gl = ["I_GMG_01_F","I_GMG_01_high_F"];
 	};
