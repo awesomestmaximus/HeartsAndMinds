@@ -105,6 +105,7 @@ switch (_this select 0) do
 		_task = player createSimpleTask [("Destroy a convoy attacking " + (_this select 2))];
 		_task setSimpleTaskDescription [format ["An armed convoy is going to attack %1. Local population is asking for your help to destroy it before!",(_this select 2)],("Destroy a convoy attacking " + (_this select 2)),("Destroy a convoy attacking " + (_this select 2))];
 		_task setSimpleTaskDestination (_this select 1);
+		_task setSimpleTaskType "attack";
 		player setVariable ["task_12",_task];
 		["TaskAssigned",["New task assigned!",("Destroy a convoy attacking " + (_this select 2))]] call bis_fnc_showNotification;
 	};
@@ -114,6 +115,7 @@ switch (_this select 0) do
 		_task = player createSimpleTask [("Rescue a pilot near " + (_this select 2))];
 		_task setSimpleTaskDescription [format ["A pilot crashed his helicopter near %1. He is asking for your help to rescue him back to base!",(_this select 2)],("Rescue a pilot near " + (_this select 2)),("Rescue a pilot near " + (_this select 2))];
 		_task setSimpleTaskDestination (_this select 1);
+		_task setSimpleTaskType "navigate";
 		player setVariable ["task_13",_task];
 		["TaskAssigned",["New task assigned!",("Rescue a pilot near " + (_this select 2))]] call bis_fnc_showNotification;
 	};
@@ -133,6 +135,7 @@ switch (_this select 0) do
 		_task = player createSimpleTask [("Liberate hostage near " + (_this select 2))];
 		_task setSimpleTaskDescription [format ["Liberate a civilian hostage in %1. Local population is asking for your help!",(_this select 2)],("Liberate hostage near " + (_this select 2)),("Liberate hostage near " + (_this select 2))];
 		_task setSimpleTaskDestination (_this select 1);
+		_task setSimpleTaskType "exit";
 		player setVariable ["task_15",_task];
 		["TaskAssigned",["New task assigned!",("Liberate hostage near " + (_this select 2))]] call bis_fnc_showNotification;
 	};
