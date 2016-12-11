@@ -5,10 +5,10 @@ class EditorData
 	angleGridStep=0.2617994;
 	scaleGridStep=1;
 	autoGroupingDist=10;
-	toggles=1;
+	toggles=129;
 	class ItemIDProvider
 	{
-		nextID=216;
+		nextID=218;
 	};
 	class MarkerIDProvider
 	{
@@ -16,10 +16,10 @@ class EditorData
 	};
 	class Camera
 	{
-		pos[]={8317.1074,90.980392,10108.831};
-		dir[]={-0.47913033,-0.53702456,-0.69437367};
-		up[]={-0.30502561,0.84353238,-0.44205496};
-		aside[]={-0.82312089,4.2375177e-008,0.567972};
+		pos[]={8212.5146,174.41766,10107.348};
+		dir[]={0.71721089,-0.54163843,-0.43858635};
+		up[]={0.46213388,0.84057325,-0.2826027};
+		aside[]={-0.52173603,2.8061913e-007,-0.85317749};
 	};
 };
 binarizationWanted=0;
@@ -274,6 +274,24 @@ class CustomAttributes
 		name="Multiplayer";
 		class Attribute0
 		{
+			property="RespawnTemplates";
+			expression="true";
+			class Value
+			{
+				class data
+				{
+					class type
+					{
+						type[]=
+						{
+							"ARRAY"
+						};
+					};
+				};
+			};
+		};
+		class Attribute1
+		{
 			property="RespawnButton";
 			expression="true";
 			class Value
@@ -288,24 +306,6 @@ class CustomAttributes
 						};
 					};
 					value=1;
-				};
-			};
-		};
-		class Attribute1
-		{
-			property="RespawnTemplates";
-			expression="true";
-			class Value
-			{
-				class data
-				{
-					class type
-					{
-						type[]=
-						{
-							"ARRAY"
-						};
-					};
 				};
 			};
 		};
@@ -365,7 +365,7 @@ class Mission
 	};
 	class Entities
 	{
-		items=77;
+		items=78;
 		class Item0
 		{
 			dataType="Marker";
@@ -4282,6 +4282,7 @@ class Mission
 			};
 			id=211;
 			type="rhsusf_M1078A1P2_B_M2_d_open_fmtv_usarmy";
+			atlOffset=0.02028656;
 			class CustomAttributes
 			{
 				class Attribute0
@@ -4388,6 +4389,19 @@ class Mission
 				};
 				nAttributes=1;
 			};
+		};
+		class Item77
+		{
+			dataType="Logic";
+			class PositionInfo
+			{
+				position[]={8130.8452,74.49424,9940.6494};
+				angles[]={6.2765183,0,6.2751913};
+			};
+			name="btc_hc_1";
+			isPlayable=1;
+			id=217;
+			type="HeadlessClient_F";
 		};
 	};
 	class Connections
