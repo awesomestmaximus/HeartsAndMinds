@@ -119,23 +119,13 @@ if (isServer) then {
 	btc_rep_militia_call_time = 600;
 	btc_rep_militia_called = - btc_rep_militia_call_time;
 
-	btc_composition_hideout = [
-		["C_supplyCrate_F",0,[0.2,0.2,0]],
-		["Flag_Red_F",0,[-0.542969,-0.270508,-0.00143433]],
-		["Campfire_burning_F",0,[-1.24414,-2.12183,-0.0314331]],
-		["Land_Sleeping_bag_blue_F",146.026,[2.82666,-1.77124,-0.00143433]],
-		["Land_TentDome_F",0,[1.08496,-3.35547,-0.00143433]],
-		["Land_TentA_F",349.935,[-2.09814,2.94702,-0.00143433]],
-		["Land_TentA_F",349.935,[1.10889,3.53687,-0.00143433]],
-		["Land_Portable_generator_F",243.462,[-3.89404,1.15088,-0.0022583]],
-		["Land_Sleeping_bag_blue_F",146.026,[4.00879,-1.00842,-0.00143433]],
-		["C_supplyCrate_F",55.6146,[-4.60059,-2.28027,-0.00143433]],
-		["Land_PaperBox_open_full_F",143.441,[-3.74023,-3.77405,-0.00143433]],
-		["Land_TentDome_F",0,[-5.93555,0.444702,-0.00143433]],
-		["Land_PaperBox_closed_F",0,[-5.76221,-3.35876,-0.00143433]],
-		["Land_PaperBox_open_empty_F",324.641,[-4.91895,-4.99585,-0.00143433]],
-		["Land_Pallet_MilBoxes_F",297.549,[-7.8623,-2.05115,-0.00143433]]
-	];
+	//Hideout classname
+	btc_type_campfire = ["MetalBarrel_burning_F","Campfire_burning_F","Land_Campfire_F","FirePlace_burning_F"];
+	btc_type_bigbox = ["Box_FIA_Ammo_F","Box_East_AmmoVeh_F","CargoNet_01_box_F","O_CargoNet_01_ammo_F","Land_Pallet_MilBoxes_F","Land_PaperBox_open_full_F"];
+	btc_type_seat = ["Land_WoodenLog_F","Land_CampingChair_V2_F","Land_CampingChair_V1_folded_F","Land_CampingChair_V1_F"];
+	btc_type_sleepingbag = ["Land_Sleeping_bag_F","Land_Sleeping_bag_blue_F","Land_Sleeping_bag_brown_F"];
+	btc_type_tent = ["Land_TentA_F","Land_TentDome_F"];
+	btc_type_camonet = ["CamoNet_ghex_big_F","CamoNet_OPFOR_big_F","CamoNet_INDP_big_F","CamoNet_BLUFOR_big_F","CamoNet_OPFOR_open_F","CamoNet_ghex_open_F","CamoNet_BLUFOR_open_F","Land_IRMaskingCover_02_F","CamoNet_BLUFOR_F","CamoNet_ghex_F","CamoNet_OPFOR_F","CamoNet_INDP_F"];
 
 	//Side
 	btc_side_aborted = false;
@@ -155,6 +145,8 @@ if (isServer) then {
 	btc_type_generator = ["Land_Device_assembled_F","Land_Device_disassembled_F"];
 	btc_type_storagebladder = ["StorageBladder_02_water_forest_F","StorageBladder_02_water_sand_F"];
 	btc_type_mines = ["APERSMine","APERSBoundingMine","APERSTripMine"];
+	btc_type_power = ["WaterPump_01_sand_F","WaterPump_01_forest_F","Land_PressureWasher_01_F","Land_DieselGroundPowerUnit_01_F","Land_JetEngineStarter_01_F","Land_PowerGenerator_F","Land_PortableGenerator_01_F"];
+	btc_type_cord = ["Land_ExtensionCord_F"];
 
 	//Vehs
 	btc_vehicles = [btc_veh_1,btc_veh_2,btc_veh_3,btc_veh_4,btc_veh_5,btc_veh_6,btc_veh_7,btc_veh_8,btc_veh_9,btc_veh_10,btc_veh_11,btc_veh_12,btc_veh_13,btc_veh_14,btc_veh_15];
