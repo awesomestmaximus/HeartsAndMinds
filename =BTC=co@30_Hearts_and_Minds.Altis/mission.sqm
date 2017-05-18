@@ -1393,6 +1393,7 @@ class Mission
 					class Attributes
 					{
 						init="call{this setVariable[""reservedHeliCAS"", true]; this setVariable [""helipilot"", true];}";
+						name="mg2_heli_pilot_1";
 						description="Helicopter Pilots (reserved)";
 						isPlayable=1;
 					};
@@ -1504,13 +1505,14 @@ class Mission
 					class PositionInfo
 					{
 						position[]={11695.815,23.170204,11906.027};
-						angles[]={6.2765174,3.6651914,6.2818484};
+						angles[]={6.2765183,3.6651914,6.2818413};
 					};
 					side="West";
 					flags=4;
 					class Attributes
 					{
 						init="call{this setVariable[""reservedHeliCAS"", true]; this setVariable [""helipilot"", true];}";
+						name="mg2_heli_pilot_2";
 						description="Helicopter Pilots (reserved)";
 						isPlayable=1;
 					};
@@ -1577,6 +1579,25 @@ class Mission
 						};
 						class Attribute3
 						{
+							property="pitch";
+							expression="_this setpitch _value;";
+							class Value
+							{
+								class data
+								{
+									class type
+									{
+										type[]=
+										{
+											"SCALAR"
+										};
+									};
+									value=0.94999999;
+								};
+							};
+						};
+						class Attribute4
+						{
 							property="Enh_onDamagedEvent";
 							expression="if !(_value == 'false') then {_this addEventHandler ['dammaged',_value]}";
 							class Value
@@ -1594,7 +1615,7 @@ class Mission
 								};
 							};
 						};
-						nAttributes=4;
+						nAttributes=5;
 					};
 				};
 			};
