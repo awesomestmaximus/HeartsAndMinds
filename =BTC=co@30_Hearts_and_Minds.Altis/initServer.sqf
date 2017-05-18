@@ -1,5 +1,5 @@
 // Allow MG admins to enter any slot (by-passing UID check)
-give_MG_admins_full_access = false;//true;
+give_MG_admins_full_access = true;
 
 /* just for testing
 MGAdmins         = call compile preprocessFileLineNumbers "@whitelist\MGAdmins.txt";
@@ -8,7 +8,7 @@ llowedHeliCAS    = call compile preprocessFileLineNumbers "@whitelist\allowedHel
 allowedSniper    = call compile preprocessFileLineNumbers "@whitelist\allowedSniper.txt";
 */
 
-MGAdmins         = [];//["76561198305284391"];
-allowedZEUS      = [];//["76561198305284391"];
-allowedHeliCAS   = ["76561198305284391"];
-allowedSniper    = [];//["76561198305284391"];
+MGAdmins         = ["76561198305284391"];
+allowedZEUS      = [];
+allowedHeliCAS   = [];
+allowedSniper    = [];
