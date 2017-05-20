@@ -8,7 +8,7 @@ class EditorData
 	toggles=1;
 	class ItemIDProvider
 	{
-		nextID=933;
+		nextID=936;
 	};
 	class MarkerIDProvider
 	{
@@ -16,11 +16,11 @@ class EditorData
 	};
 	class LayerIndexProvider
 	{
-		nextID=44;
+		nextID=55;
 	};
 	class Camera
 	{
-		pos[]={11691.422,48.16153,11878.314};
+		pos[]={11691.387,48.162289,11878.413};
 		dir[]={0,-0.70710683,0.70710683};
 		up[]={0,0.70710677,0.70710677};
 		aside[]={0.99999994,0,-0};
@@ -354,15 +354,17 @@ randomSeed=2442963;
 assetType="Free";
 class ScenarioData
 {
+	saving=0;
+	forceRotorLibSimulation=1;
 	respawnDialog=0;
 	disabledAI=1;
 	respawn=3;
-	respawnDelay=5;
+	respawnDelay=30.000002;
 	class Header
 	{
 		gameType="Coop";
 		minPlayers=1;
-		maxPlayers=15;
+		maxPlayers=16;
 	};
 	wreckRemovalMaxTime=3600;
 };
@@ -434,8 +436,8 @@ class CustomAttributes
 		name="Scenario";
 		class Attribute0
 		{
-			property="Enh_line1";
-			expression="missionNamespace setVariable ['Enh_line1',_value]";
+			property="Enh_ambientFlyby_startPos";
+			expression="missionNamespace setVariable ['Enh_ambientFlyby_startPos',_value]";
 			class Value
 			{
 				class data
@@ -444,14 +446,206 @@ class CustomAttributes
 					{
 						type[]=
 						{
-							"STRING"
+							"ARRAY"
 						};
 					};
-					value="HEARTS AND MINDS";
+					class value
+					{
+						items=3;
+						class Item0
+						{
+							class data
+							{
+								class type
+								{
+									type[]=
+									{
+										"SCALAR"
+									};
+								};
+								value=11340;
+							};
+						};
+						class Item1
+						{
+							class data
+							{
+								class type
+								{
+									type[]=
+									{
+										"SCALAR"
+									};
+								};
+								value=7520;
+							};
+						};
+						class Item2
+						{
+							class data
+							{
+								class type
+								{
+									type[]=
+									{
+										"SCALAR"
+									};
+								};
+								value=100;
+							};
+						};
+					};
 				};
 			};
 		};
 		class Attribute1
+		{
+			property="Enh_ambientFlyby_endPos";
+			expression="missionNamespace setVariable ['Enh_ambientFlyby_endPos',_value]";
+			class Value
+			{
+				class data
+				{
+					class type
+					{
+						type[]=
+						{
+							"ARRAY"
+						};
+					};
+					class value
+					{
+						items=3;
+						class Item0
+						{
+							class data
+							{
+								class type
+								{
+									type[]=
+									{
+										"SCALAR"
+									};
+								};
+								value=11530;
+							};
+						};
+						class Item1
+						{
+							class data
+							{
+								class type
+								{
+									type[]=
+									{
+										"SCALAR"
+									};
+								};
+								value=22370;
+							};
+						};
+						class Item2
+						{
+							class data
+							{
+								class type
+								{
+									type[]=
+									{
+										"SCALAR"
+									};
+								};
+								value=100;
+							};
+						};
+					};
+				};
+			};
+		};
+		class Attribute2
+		{
+			property="Enh_ambientFlyby_Delay";
+			expression="missionNamespace setVariable ['Enh_ambientFlyby_delay',_value]";
+			class Value
+			{
+				class data
+				{
+					class type
+					{
+						type[]=
+						{
+							"SCALAR"
+						};
+					};
+					value=10;
+				};
+			};
+		};
+		class Attribute3
+		{
+			property="Enh_ambientFlyby_type";
+			expression="				if (isServer && !is3DEN && !(_value isEqualTo [])) then				{					_value spawn					{						waitUntil {time > 0.2};												private _startPos = missionNamespace getVariable 'Enh_ambientFlyby_startPos',						private _endPos = missionNamespace getVariable 'Enh_ambientFlyby_endPos',						private _alt = missionNamespace getVariable 'Enh_ambientFlyby_altitude',						private _speed = missionNamespace getVariable 'Enh_ambientFlyby_speed',						private _delay = missionNamespace getVariable 'Enh_ambientFlyby_delay';						private _iterations = missionNamespace getVariable 'Enh_ambientFlyby_iterations';												for '_i' from 0 to _iterations do						{							sleep _delay;							[_startPos,_endPos,_alt,_speed,selectRandom _this] call BIS_fnc_ambientFlyby;						};					};				};			";
+			class Value
+			{
+				class data
+				{
+					class type
+					{
+						type[]=
+						{
+							"ARRAY"
+						};
+					};
+					class value
+					{
+						items=3;
+						class Item0
+						{
+							class data
+							{
+								class type
+								{
+									type[]=
+									{
+										"STRING"
+									};
+								};
+								value="rhsusf_f22";
+							};
+						};
+						class Item1
+						{
+							class data
+							{
+								class type
+								{
+									type[]=
+									{
+										"STRING"
+									};
+								};
+								value="rhs_a10";
+							};
+						};
+						class Item2
+						{
+							class data
+							{
+								class type
+								{
+									type[]=
+									{
+										"STRING"
+									};
+								};
+								value="rhs_c130j";
+							};
+						};
+					};
+				};
+			};
+		};
+		class Attribute4
 		{
 			property="Enh_ambientFlyby_speed";
 			expression="missionNamespace setVariable ['Enh_ambientFlyby_speed',_value]";
@@ -470,7 +664,45 @@ class CustomAttributes
 				};
 			};
 		};
-		class Attribute2
+		class Attribute5
+		{
+			property="Enh_line1";
+			expression="missionNamespace setVariable ['Enh_line1',_value]";
+			class Value
+			{
+				class data
+				{
+					class type
+					{
+						type[]=
+						{
+							"STRING"
+						};
+					};
+					value="HEARTS AND MINDS";
+				};
+			};
+		};
+		class Attribute6
+		{
+			property="Enh_ambientFlyby_iterations";
+			expression="missionNamespace setVariable ['Enh_ambientFlyby_iterations',_value]";
+			class Value
+			{
+				class data
+				{
+					class type
+					{
+						type[]=
+						{
+							"SCALAR"
+						};
+					};
+					value=1;
+				};
+			};
+		};
+		class Attribute7
 		{
 			property="EnableDebugConsole";
 			expression="true";
@@ -489,7 +721,45 @@ class CustomAttributes
 				};
 			};
 		};
-		nAttributes=3;
+		class Attribute8
+		{
+			property="Enh_musicVolume";
+			expression="if (!is3DEN && hasInterface) then {0 fadeMusic _value}";
+			class Value
+			{
+				class data
+				{
+					class type
+					{
+						type[]=
+						{
+							"SCALAR"
+						};
+					};
+					value=0.2;
+				};
+			};
+		};
+		class Attribute9
+		{
+			property="Enh_radioVolume";
+			expression="if (!is3DEN && hasInterface) then {0 fadeRadio _value}";
+			class Value
+			{
+				class data
+				{
+					class type
+					{
+						type[]=
+						{
+							"SCALAR"
+						};
+					};
+					value=0;
+				};
+			};
+		};
+		nAttributes=10;
 	};
 };
 class Mission
@@ -2899,6 +3169,7 @@ class Mission
 					};
 					id=138;
 					type="I_soldier_F";
+					atlOffset=0.00022506714;
 					class CustomAttributes
 					{
 						class Attribute0
@@ -2947,6 +3218,7 @@ class Mission
 			{
 			};
 			id=137;
+			atlOffset=0.00022506714;
 		};
 		class Item17
 		{
@@ -4653,7 +4925,7 @@ class Mission
 									"SCALAR"
 								};
 							};
-							value=2;
+							value=3;
 						};
 					};
 				};
@@ -10291,7 +10563,7 @@ class Mission
 					};
 					id=419;
 					type="Land_Razorwire_F";
-					atlOffset=0.12246132;
+					atlOffset=0.12249184;
 				};
 				class Item7
 				{
@@ -12882,7 +13154,7 @@ class Mission
 					};
 					id=488;
 					type="Land_HBarrier_Big_F";
-					atlOffset=0.0023384094;
+					atlOffset=0.0023174286;
 				};
 				class Item7
 				{
@@ -12900,7 +13172,7 @@ class Mission
 					};
 					id=489;
 					type="Land_Sink_F";
-					atlOffset=-3.8146973e-006;
+					atlOffset=2.0980835e-005;
 				};
 				class Item8
 				{
@@ -12954,7 +13226,7 @@ class Mission
 					};
 					id=492;
 					type="Land_HBarrier_Big_F";
-					atlOffset=0.0023193359;
+					atlOffset=0.0023422241;
 				};
 				class Item11
 				{
@@ -13919,7 +14191,7 @@ class Mission
 					};
 					id=649;
 					type="Land_BarrelSand_grey_F";
-					atlOffset=-0.0001449585;
+					atlOffset=-0.00012588501;
 				};
 				class Item4
 				{
@@ -14025,6 +14297,7 @@ class Mission
 					};
 					id=655;
 					type="Land_HBarrier_Big_F";
+					atlOffset=-2.2888184e-005;
 				};
 				class Item10
 				{
@@ -14093,6 +14366,7 @@ class Mission
 					};
 					id=659;
 					type="Land_Pallet_MilBoxes_F";
+					atlOffset=-2.6702881e-005;
 				};
 				class Item14
 				{
@@ -14515,7 +14789,7 @@ class Mission
 					};
 					id=682;
 					type="Land_WaterTank_F";
-					atlOffset=-4.9591064e-005;
+					atlOffset=-9.1552734e-005;
 				};
 				class Item37
 				{
@@ -14570,6 +14844,7 @@ class Mission
 					};
 					id=685;
 					type="Land_BagFence_Long_F";
+					atlOffset=-1.1444092e-005;
 				};
 				class Item40
 				{
@@ -14626,7 +14901,7 @@ class Mission
 					};
 					id=688;
 					type="Land_BagFence_Long_F";
-					atlOffset=-1.9073486e-006;
+					atlOffset=-3.8146973e-006;
 				};
 				class Item43
 				{
@@ -14681,6 +14956,7 @@ class Mission
 					};
 					id=691;
 					type="Land_BagFence_Long_F";
+					atlOffset=1.5258789e-005;
 				};
 				class Item46
 				{
@@ -15447,7 +15723,7 @@ class Mission
 					};
 					id=733;
 					type="Land_HBarrier_Big_F";
-					atlOffset=1.9073486e-006;
+					atlOffset=-2.6702881e-005;
 				};
 				class Item88
 				{
@@ -16215,7 +16491,7 @@ class Mission
 					};
 					id=877;
 					type="Land_HBarrier_Big_F";
-					atlOffset=1.9073486e-006;
+					atlOffset=2.6702881e-005;
 				};
 				class Item42
 				{
@@ -16285,7 +16561,7 @@ class Mission
 					};
 					id=881;
 					type="Land_WaterTank_F";
-					atlOffset=-0.0039710999;
+					atlOffset=-0.0038719177;
 				};
 				class Item46
 				{
@@ -16593,7 +16869,7 @@ class Mission
 					};
 					id=907;
 					type="Land_Razorwire_F";
-					atlOffset=0.063171387;
+					atlOffset=0.063152313;
 				};
 				class Item6
 				{
