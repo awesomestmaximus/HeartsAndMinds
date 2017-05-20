@@ -1,7 +1,9 @@
 
 private ["_city","_is_init","_data_units","_type","_radius_x","_radius_y","_has_en","_has_ho","_ieds","_radius","_number_patrol_active","_number_civ_veh_active"];
 
-hint ("Activate " + str(_this));
+if (btc_debug) then {
+    hint ("Activate " + str(_this));
+};
 
 _city = btc_city_all select (_this select 0);
 
