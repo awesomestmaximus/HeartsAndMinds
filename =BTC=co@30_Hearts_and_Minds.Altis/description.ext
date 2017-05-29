@@ -4,7 +4,7 @@ author = Giallustio modded by AwesomestMaximus;
 onLoadName = Hearts and Minds;
 onLoadMission = www.blacktemplars.altervista.org;
 
-respawnOnStart = -1;
+respawnOnStart = 0;
 
 #include "core\def\dlg_def.hpp"
 

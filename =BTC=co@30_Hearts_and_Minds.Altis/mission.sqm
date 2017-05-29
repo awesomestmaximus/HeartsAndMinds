@@ -8,7 +8,7 @@ class EditorData
 	toggles=9;
 	class ItemIDProvider
 	{
-		nextID=1178;
+		nextID=1179;
 	};
 	class MarkerIDProvider
 	{
@@ -16,7 +16,7 @@ class EditorData
 	};
 	class LayerIndexProvider
 	{
-		nextID=166;
+		nextID=180;
 	};
 	class Camera
 	{
@@ -423,7 +423,6 @@ assetType="Free";
 class ScenarioData
 {
 	saving=0;
-	forceRotorLibSimulation=1;
 	respawnDialog=0;
 	disabledAI=1;
 	respawn=3;
@@ -920,7 +919,7 @@ class Mission
 	};
 	class Entities
 	{
-		items=80;
+		items=81;
 		class Item0
 		{
 			dataType="Marker";
@@ -1616,6 +1615,7 @@ class Mission
 					{
 						skill=0.60000002;
 						init="call{this setVariable [""side_mission"",true]; this setVariable [""reservedZEUS"", true];}";
+						name="command";
 						description="Commander";
 						isPlayer=1;
 						isPlayable=1;
@@ -1626,8 +1626,8 @@ class Mission
 					{
 						class Attribute0
 						{
-							property="Enh_onKilledEvent";
-							expression="if !(_value == 'false') then {_this addEventHandler ['killed',_value]}";
+							property="Enh_onDamagedEvent";
+							expression="if !(_value == 'false') then {_this addEventHandler ['dammaged',_value]}";
 							class Value
 							{
 								class data
@@ -1664,8 +1664,8 @@ class Mission
 						};
 						class Attribute2
 						{
-							property="speaker";
-							expression="_this setspeaker _value;";
+							property="Enh_onKilledEvent";
+							expression="if !(_value == 'false') then {_this addEventHandler ['killed',_value]}";
 							class Value
 							{
 								class data
@@ -1677,7 +1677,7 @@ class Mission
 											"STRING"
 										};
 									};
-									value="Male05ENG";
+									value="false";
 								};
 							};
 						};
@@ -1702,8 +1702,8 @@ class Mission
 						};
 						class Attribute4
 						{
-							property="Enh_onDamagedEvent";
-							expression="if !(_value == 'false') then {_this addEventHandler ['dammaged',_value]}";
+							property="speaker";
+							expression="_this setspeaker _value;";
 							class Value
 							{
 								class data
@@ -1715,11 +1715,80 @@ class Mission
 											"STRING"
 										};
 									};
-									value="false";
+									value="Male05ENG";
 								};
 							};
 						};
-						nAttributes=5;
+						class Attribute5
+						{
+							property="Enh_ambientAnimParams";
+							expression="	if (is3DEN) then {_this call BIS_fnc_ambientAnim__terminate};	[_this,_value] spawn	{		sleep 0.1;		private _unit = _this select 0;		private _value = _this select 1;		if (!(_value select 0 == '') && !isMultiplayer) then		{			[_unit,_value select 0,_value select 1,objNull,false,false] call BIS_fnc_ambientAnim;		};	}";
+							class Value
+							{
+								class data
+								{
+									class type
+									{
+										type[]=
+										{
+											"ARRAY"
+										};
+									};
+									class value
+									{
+										items=2;
+										class Item0
+										{
+											class data
+											{
+												class type
+												{
+													type[]=
+													{
+														"STRING"
+													};
+												};
+												value="";
+											};
+										};
+										class Item1
+										{
+											class data
+											{
+												class type
+												{
+													type[]=
+													{
+														"STRING"
+													};
+												};
+												value="ASIS";
+											};
+										};
+									};
+								};
+							};
+						};
+						class Attribute6
+						{
+							property="Enh_featureType";
+							expression="_this setFeatureType (parseNumber _value)";
+							class Value
+							{
+								class data
+								{
+									class type
+									{
+										type[]=
+										{
+											"STRING"
+										};
+									};
+									value="0";
+								};
+							};
+						};
+						nAttributes=7;
 					};
 				};
 				class Item1
@@ -23639,6 +23708,98 @@ class Mission
 			};
 			id=1162;
 			atlOffset=0.8990612;
+		};
+		class Item80
+		{
+			dataType="Logic";
+			class PositionInfo
+			{
+				position[]={11603.728,23.837746,12103.402};
+				angles[]={6.2551899,0,6.2658539};
+			};
+			id=1178;
+			type="ModuleCurator_F";
+			atlOffset=0.0090007782;
+			class CustomAttributes
+			{
+				class Attribute0
+				{
+					property="ModuleCurator_F_Owner";
+					expression="_this setVariable ['Owner',_value,true];";
+					class Value
+					{
+						class data
+						{
+							class type
+							{
+								type[]=
+								{
+									"STRING"
+								};
+							};
+							value="command";
+						};
+					};
+				};
+				class Attribute1
+				{
+					property="ModuleCurator_F_Forced";
+					expression="_this setVariable ['Forced',_value,true];";
+					class Value
+					{
+						class data
+						{
+							class type
+							{
+								type[]=
+								{
+									"SCALAR"
+								};
+							};
+							value=0;
+						};
+					};
+				};
+				class Attribute2
+				{
+					property="ModuleCurator_F_Name";
+					expression="_this setVariable ['Name',_value,true];";
+					class Value
+					{
+						class data
+						{
+							class type
+							{
+								type[]=
+								{
+									"STRING"
+								};
+							};
+							value="Commander";
+						};
+					};
+				};
+				class Attribute3
+				{
+					property="ModuleCurator_F_Addons";
+					expression="_this setVariable ['Addons',_value,true];";
+					class Value
+					{
+						class data
+						{
+							class type
+							{
+								type[]=
+								{
+									"SCALAR"
+								};
+							};
+							value=3;
+						};
+					};
+				};
+				nAttributes=4;
+			};
 		};
 	};
 	class Connections
