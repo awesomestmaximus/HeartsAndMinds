@@ -4,10 +4,10 @@ Required Mods:
         !Workshop\@task_force_radio;
         !Workshop\@RHSUSAF;
         !Workshop\@Vcom AI V2.81;
-        @L_Mount;
         !Workshop\@ACE Compat - RHS United States Armed Forces"
 
 Optional Mods:
+        L_Mount
         Ares Mod
         ShackTacUI
         DynaSound 2
