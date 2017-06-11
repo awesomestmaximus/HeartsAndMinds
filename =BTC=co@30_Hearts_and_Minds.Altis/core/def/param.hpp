@@ -25,7 +25,7 @@ class Params {
 		title = "			Load the savegame (if available)";
 		values[]={0,1};
 		texts[]={"No","Yes"};
-		default = 1;
+		default = 0;
 	};
 	class btc_p_auto_db {
 	//paramsArray[4]
@@ -46,7 +46,7 @@ class Params {
 		title = "			Enemy type:";
 		values[]={0,1,2,3,4,5,6,7,8,9,10};
 		texts[]={"Guerrilla (A3)","CAF (@CAF Aggressors)","AAF (A3)","RHS Insurgents (@RHS_AFRF)","Militia (@=BTC= Militia)","Militia (@IWAR: Irregular Warfare)","Syndikat (A3)","Middle East Militia (@Project Opfor)","ISTS (@Project Opfor)","Ultranationalists (@Project Opfor)","CSAT Pacific (A3)"};
-		default = 0;
+		default = 3;
 	};
 	class btc_p_civ {
 	//paramsArray[7]
@@ -102,14 +102,14 @@ class Params {
 		title = "			Info cache distance:";
 		values[]={500,1000,1500,2000,2500,3000,3500,4000,5000};
 		texts[]={"500 m","1000 m","1500 m","2000 m","2500 m","3000 m","3500 m","4000 m","5000 m"};
-		default = 1000;
+		default = 500;
 	};
 	class btc_p_cache_info_ratio {
 	//paramsArray[15]
 		title = "			Cache info ratio:";
 		values[]={50,100};
 		texts[]={"50 m","100 m"};
-		default = 100;
+		default = 50;
 	};
 	class btc_p_info_chance {
 	//paramsArray[16]
@@ -137,14 +137,14 @@ class Params {
 	   title = "			Medical Level";
 	   values[] = {1,2};
 	   texts[] = {"Basic","Advanced"};
-	   default = 2;
+	   default = 1;
 	};
 	class btc_p_adv_wounds {
 		//paramsArray[20]
 	   title = "			Advanced Wounds";
 	   values[] = {0,1};
 	   texts[] = {"Off","On"};
-	   default = 1;
+	   default = 0;
 	};
 	class btc_p_rev {
 	//paramsArray[21]
@@ -249,14 +249,14 @@ class Params {
 		title = "			Reputation at start:";
 		values[]={0, 200, 500, 750};
 		texts[]={"Very Low","Low","Normal","High"};
-		default = 200;
+		default = 500;
 	};
 	class btc_p_rearm {
 	//paramsArray[36]
 		title = "			Rearm Level:";
 		values[]={0,1,2};
 		texts[]={"Entire vehicle","Entire magazine","Amount based on caliber"};
-		default = 2;
+		default = 1;
 	};
 	class btc_p_sea {
 	//paramsArray[37]

@@ -16,7 +16,7 @@ class EditorData
 	};
 	class LayerIndexProvider
 	{
-		nextID=228;
+		nextID=238;
 	};
 	class Camera
 	{
@@ -687,25 +687,6 @@ class CustomAttributes
 		};
 		class Attribute5
 		{
-			property="Enh_line1";
-			expression="missionNamespace setVariable ['Enh_line1',_value]";
-			class Value
-			{
-				class data
-				{
-					class type
-					{
-						type[]=
-						{
-							"STRING"
-						};
-					};
-					value="HEARTS AND MINDS";
-				};
-			};
-		};
-		class Attribute6
-		{
 			property="Enh_ambientFlyby_iterations";
 			expression="missionNamespace setVariable ['Enh_ambientFlyby_iterations',_value]";
 			class Value
@@ -723,7 +704,7 @@ class CustomAttributes
 				};
 			};
 		};
-		class Attribute7
+		class Attribute6
 		{
 			property="EnableDebugConsole";
 			expression="true";
@@ -742,7 +723,7 @@ class CustomAttributes
 				};
 			};
 		};
-		class Attribute8
+		class Attribute7
 		{
 			property="Enh_musicVolume";
 			expression="if (!is3DEN && hasInterface) then {0 fadeMusic _value}";
@@ -761,7 +742,7 @@ class CustomAttributes
 				};
 			};
 		};
-		class Attribute9
+		class Attribute8
 		{
 			property="Enh_radioVolume";
 			expression="if (!is3DEN && hasInterface) then {0 fadeRadio _value}";
@@ -780,7 +761,7 @@ class CustomAttributes
 				};
 			};
 		};
-		nAttributes=10;
+		nAttributes=9;
 	};
 };
 class Mission
