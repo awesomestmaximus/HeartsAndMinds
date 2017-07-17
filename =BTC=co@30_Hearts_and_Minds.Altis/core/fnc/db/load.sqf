@@ -206,7 +206,6 @@ diag_log format ["5: %1",(_x select 5)];
 		_veh setPosASL (_x select 1);
 		if ((getPos _veh) select 2 < 0) then {_veh setVectorUp surfaceNormal position _veh;};
 		_veh setFuel (_x select 3);
-		_veh setDamage (_x select 4);
 		_veh setVariable ["btc_dont_delete",true];
 		_veh call btc_fnc_db_add_veh;
 		{
@@ -258,6 +257,13 @@ diag_log format ["5: %1",(_x select 5)];
 				_veh addItemCargoGlobal[((_items select 0) select _i),((_items select 1) select _i)];
 			};
 		};
+
+		//Disable explosion effect during database loading
+		_veh setVariable ["ace_cookoff_enable", false];
+		_veh setVariable ["ace_cookoff_enableAmmoCookoff", false];
+		_veh setDamage [(_x select 4), false];
+		_veh setVariable ["ace_cookoff_enable", nil];
+		_veh setVariable ["ace_cookoff_enableAmmoCookoff", nil];
 	} foreach _vehs;
 }, _vehs, 0.5] call CBA_fnc_waitAndExecute;
 
